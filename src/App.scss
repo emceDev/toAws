@@ -146,18 +146,29 @@ background-color: violet;
 .ProductList{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 .ProductCard{
   display: flex;
   flex-direction: column;
-  height: 45vh;
-  width: 29vw;
+  // height: 45vh;
+  // width: 29vw;
   margin:2vw;
   background-color: orangered;
+
+
+  font-family: 'Raleway';
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 160%;
+
   .Image{
     background-color: aquamarine;
-    height: 80%;
+    // height: 80%;
     width: 100%;
+    width: 354px;
+    height: 330px;
   }
   .Title{height: 10%}
   .Price{height: 10%}

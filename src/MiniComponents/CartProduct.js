@@ -1,4 +1,4 @@
-import { AdjustButtons } from "./AdjustButtons";
+import AdjustButtons from "./AdjustButtons";
 import { QuantityButtons } from "./QuantityButtons";
 
 export const CartProduct = (props) => {

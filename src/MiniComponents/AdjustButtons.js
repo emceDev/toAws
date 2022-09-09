@@ -1,23 +1,38 @@
-export const AdjustButtons = () => {
-	return (
-		<div className="AdjustButtons">
-			<div>
-				<p>size:</p>
-				<div className="AdjustButtonsSizes">
-					<div>s</div>
-					<div>xs</div>
-					<div>M</div>
-					<div>L</div>
+import { Component } from "react";
+
+class AdjustButtons extends Component {
+	state = {};
+	render() {
+		return (
+			<div className="AdjustButtons">
+				<div>
+					{this.props.attributes.map((attr) => {
+						return (
+							<div key={attr.name}>
+								<p>{attr.name}</p>
+								<div className="AdjustButtonsSizes">
+									{attr.items.map((item) => {
+										return (
+											<div
+												key={item.value}
+												style={{
+													backgroundColor:
+														attr.name === "Color" ? item.value : "white",
+													margin: "2%",
+												}}
+											>
+												{item.displayValue}
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						);
+					})}
 				</div>
 			</div>
-			<div>
-				<p>color:</p>
-				<div className="AdjustButtonsColors">
-					<div>r</div>
-					<div>w</div>
-					<div>g</div>
-				</div>
-			</div>
-		</div>
-	);
-};
+		);
+	}
+}
+
+export default AdjustButtons;
