@@ -1,0 +1,32 @@
+.CartProduct{
+    font-family: 'Raleway';
+    font-style: normal;
+    display: flex;
+    background-color: green;
+    padding-bottom: 5vh;
+    height: fit-content;
+    h1{
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 27px;
+    }
+    h2{
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 27px;
+    }
+    .col1{
+      width: 60%;
+      background-color: yellow;
+    }
+    .col2{
+      width: 5%;
+      padding-left: 2.5%;
+      padding-right: 2.5%;
+    }
+    .col3{
+      width: 40%;
+    }
+   
+    
+  }

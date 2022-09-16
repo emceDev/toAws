@@ -1,0 +1,35 @@
+.ProductDetails{
+    display: flex;
+    // width: 100vw;
+    height: 70vh;
+    padding:5vh 10vw 5vh 4vw;
+    // background-color: violet;
+    .Imgs{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      width: 10%; 
+      background-color: beige;
+      margin-right: 2%;
+      overflow: auto;
+      div{
+        width: 100%;
+        height: 10%;
+        background-color: rebeccapurple;
+        // margin-bottom: 5
+      }
+    }
+    .BigImg{
+      width: 60%; 
+      background-color: yellow;
+      margin-right: 4%;
+    }
+    .Text{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      width: 40%; 
+      background-color: purple;
+    }
+    }

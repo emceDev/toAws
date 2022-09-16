@@ -1,7 +1,5 @@
 import { Component } from "react";
-import { AdjustButtons } from "../MiniComponents/AdjustButtons";
-import { CartProduct } from "../MiniComponents/CartProduct";
-import { QuantityButtons } from "../MiniComponents/QuantityButtons";
+// import CartProduct from "../MiniComponents/CartProduct";
 
 class CartOverlay extends Component {
 	state = {};
@@ -10,8 +8,8 @@ class CartOverlay extends Component {
 			<div className="CartOverlay">
 				My bag, number of items
 				<div>
-					<CartProduct hideButtons={true} />
-					<CartProduct hideButtons={true} />
+					{/* <CartProduct hideButtons={true} /> */}
+					{/* <CartProduct hideButtons={true} /> */}
 				</div>
 				<div className="CartOverlayPrice">
 					<div>Total</div>
@@ -26,7 +24,7 @@ class CartOverlay extends Component {
 	}
 }
 
-export default CartOverlay;
+// export default CartOverlay;
 
 const CartOverlayProduct = () => {
 	return (
@@ -35,9 +33,9 @@ const CartOverlayProduct = () => {
 				<p>title</p>
 				<p>subtitle</p>
 				<p>price</p>
-				<AdjustButtons />
+				{/* <AdjustButtons /> */}
 			</div>
-			<QuantityButtons />
+			{/* <QuantityButtons /> */}
 			<div>image</div>
 		</div>
 	);

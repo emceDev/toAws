@@ -1,0 +1,332 @@
+.Cart{
+  z-index: 1000;
+  background-color: white;
+  background-color: red;
+  padding-left: 10%;
+  padding-right: 10%;
+  h1{
+    font-weight: 700;
+font-size: 32px;
+line-height: 40px;
+  }
+}
+.CartProduct{
+  font-family: 'Raleway';
+  font-style: normal;
+  display: flex;
+  background-color: green;
+  padding-bottom: 5vh;
+  height: fit-content;
+  h1{
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 27px;
+  }
+  h2{
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 27px;
+  }
+  .col1{
+    width: 60%;
+    background-color: yellow;
+  }
+  .col2{
+    width: 5%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+  }
+  .col3{
+    width: 40%;
+  }
+ 
+  
+}
+.Price{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+// Styling for cart
+.image{
+  background-color: violet;
+  width: 100%;
+  height: 100%;
+}
+.imgButtons{
+display: flex;
+justify-content: space-evenly;
+
+ z-index: 1000;
+ height: 10%;
+ width: 15%;
+ position: relative;
+ bottom:15%;
+ right:-75%;
+ div{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.73);
+  border: 1.5px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+  color: white;
+  text-align: center;
+ }
+ div:nth-of-type(2){
+  transform: rotate(-180deg);
+ }
+}
+
+// cart order button
+.CartOrder{
+  width: 25vw;
+  .BtnOrder{
+    width: 100%;
+    height: 100%;
+  }
+}
+.CartOrderDetails{
+  display: flex;
+  font-family: 'Raleway';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 28px;
+
+  div:first-of-type {
+    width: 40%;
+  }
+ div:nth-last-of-type(1){
+  font-weight: 700;
+ }
+}
+.ButtonOrder{
+  display: flex;
+  background: #5ECE7B;
+  justify-content: center;
+  align-items: center;
+  height: 43px;
+  color: white;
+  font-weight: 600;
+font-size: 14px;
+line-height: 120%;
+text-transform: uppercase;
+}
+// OPENED CART IN DROPDOWN
+.CartOverlay{
+  background-color: white;
+  position: absolute;
+  right: 2vw;
+  width: 25vw;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 2%;
+  .col2{
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+  .CartProduct{
+    height: 190px;
+    h1,h2{
+      font-size: 16px;
+      line-height: 160%;
+    }
+  }
+  .AttributeButtons,.AttributeButtonColor{
+    div{ width: 16px;
+    height: 16px;}
+   
+  }
+  
+}
+.CartOverlayPrice{
+  display: flex;
+  background-color: aquamarine;
+}
+.CartOverlayBtns{
+  display: flex;
+  justify-content: space-around;
+  background-color: violet;
+  font-weight: 400;
+font-size: 14px;
+line-height: 160%;
+}
+
+
+// PRODUCT DETAILS
+.ProductDetails{
+display: flex;
+// width: 100vw;
+height: 70vh;
+padding:5vh 10vw 5vh 4vw;
+// background-color: violet;
+.Imgs{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 10%; 
+  background-color: beige;
+  margin-right: 2%;
+  div{
+    width: 100%;
+    height: 10%;
+    background-color: rebeccapurple;
+    margin-bottom: 5vh;
+  }
+}
+.BigImg{
+  width: 60%; 
+  background-color: yellow;
+  margin-right: 4%;
+}
+.Text{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 40%; 
+  background-color: purple;
+}
+}
+// PRODUCT
+.ProductList{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.ProductCard{
+  display: flex;
+  flex-direction: column;
+  // height: 45vh;
+  // width: 29vw;
+  margin:2vw;
+  background-color: orangered;
+
+
+  font-family: 'Raleway';
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 160%;
+
+  .Image{
+    background-color: aquamarine;
+    // height: 80%;
+    width: 100%;
+    width: 354px;
+    height: 330px;
+  }
+  .Title{height: 10%}
+  .Price{height: 10%}
+  
+}
+.ProductList{
+  min-height: 80vh;
+  width: 100vw;
+  background-color: greenyellow;
+}
+// NAVBAR
+.Navbar{
+  display: flex;
+  background-color: aqua;
+  justify-content: space-between;
+  width: 100vw;
+  height: 5vh;
+
+}  
+.NavbarRight{
+  display: flex;
+  flex-direction: row;
+  margin-right: 5%;
+  .Switch{
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.CurrencySwitcher{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  background-color: rebeccapurple;
+  .Switch{
+    display: flex;
+    margin-right: 20px;
+    div{
+      align-self: center;
+    }
+    
+  }
+  .CurrencyList{
+  
+  }
+}
+
+.Categories{
+  display: flex;
+background-color: aliceblue;
+}
+
+
+.AdjustButtons{
+  font-family: 'Roboto Condensed';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 18px;
+  .AttributeContainer{
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+}.AttributeButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: lightblue;
+ 
+.AttributeButtonText{
+  border: 1px solid #1D1F22;
+  width: 63px;
+height: 45px;
+display: flex;
+align-items: center;
+justify-content: center;
+letter-spacing: 0.05em;
+}
+.AttributeButtonColor{
+  width: 32px;
+height: 32px;
+}
+}
+  
+}
+.QuantityButtons{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100%;
+  
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 160%;
+
+
+  div{
+    border: 1px solid #1D1F22;
+    width: 100%;
+    text-align: center;
+  }
+  p{
+
+  }
+}

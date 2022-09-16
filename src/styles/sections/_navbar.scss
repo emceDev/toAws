@@ -1,0 +1,26 @@
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    height: 5vh;
+    padding-left: 4vw;
+    padding-right: 4vw;
+  }  
+  .Categories{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    div{
+      padding-right: 5%;
+    }
+  }
+  
+  .NavbarRight{
+    display: flex;
+    flex-direction: row;
+    margin-right: 5%;
+    .Switch{
+      height: 100%;
+      width: 100%;
+    }
+  }

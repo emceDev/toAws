@@ -1,0 +1,34 @@
+.AdjustButtons{
+    font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+    .AttributeContainer{
+      font-family: 'Source Sans Pro';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+  }.AttributeButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: lightblue;
+   
+  .AttributeButtonText{
+    border: 1px solid #1D1F22;
+    width: 63px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  }
+  .AttributeButtonColor{
+    width: 32px;
+  height: 32px;
+  }
+  }
+    
+  }

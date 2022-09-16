@@ -1,0 +1,231 @@
+.Cart{
+  background-color: red;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.CartProduct{
+  font-family: 'Raleway';
+  font-style: normal;
+  display: flex;
+  background-color: green;
+  padding-bottom: 5vh;
+  height: 40vh;
+  h1{
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 27px;
+  }
+  h2{
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 27px;
+  }
+  .col1{
+    width: 60%;
+    background-color: yellow;
+  }
+  .col2{
+    width: 5%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+  }
+  .col3{
+    width: 40%;
+  }
+ 
+  
+}
+.Price{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+// Styling for cart
+.image{
+  background-color: violet;
+  width: 100%;
+  height: 100%;
+}
+.imgButtons{
+display: flex;
+justify-content: space-evenly;
+background-color: orange;
+ z-index: 1000;
+ height: 10%;
+ width: 15%;
+ position: relative;
+ bottom:15%;
+ right:-75%;
+ div{
+  height: 100%;
+  width: 45%;
+  background-color: aquamarine;
+  align-content: center;
+ }
+}
+.QuantityButtons{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: aquamarine;
+  height: 100%;
+}
+// cart order button
+.CartOrder{
+  width: 25vw;
+  .BtnOrder{
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+  }
+}
+.CartOrderDetails{
+  display: flex;
+  background-color: olivedrab;
+
+  div:first-of-type {
+    background-color: aqua;
+    width: 40%;
+  }
+ 
+}
+// OPENED CART IN DROPDOWN
+.CartOverlay{
+  background-color: aquamarine;
+  width: 25vw;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 2%;
+  .col2{
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+  .CartProduct{
+    height: auto;
+  }
+}
+.CartOverlayPrice{
+  display: flex;
+  background-color: aquamarine;
+}
+.CartOverlayBtns{
+  display: flex;
+  justify-content: space-around;
+  background-color: violet;
+}
+
+
+// PRODUCT DETAILS
+.ProductDetails{
+display: flex;
+// width: 100vw;
+height: 70vh;
+padding:5vh 10vw 5vh 4vw;
+background-color: violet;
+.Imgs{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 10%; 
+  background-color: beige;
+  margin-right: 2%;
+  div{
+    width: 100%;
+    height: 10%;
+    background-color: rebeccapurple;
+    margin-bottom: 5vh;
+  }
+}
+.BigImg{
+  width: 60%; 
+  background-color: yellow;
+  margin-right: 4%;
+}
+.Text{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 40%; 
+  background-color: purple;
+}
+}
+// PRODUCT
+.ProductList{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.ProductCard{
+  display: flex;
+  flex-direction: column;
+  // height: 45vh;
+  // width: 29vw;
+  margin:2vw;
+  background-color: orangered;
+
+
+  font-family: 'Raleway';
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+line-height: 160%;
+
+  .Image{
+    background-color: aquamarine;
+    // height: 80%;
+    width: 100%;
+    width: 354px;
+    height: 330px;
+  }
+  .Title{height: 10%}
+  .Price{height: 10%}
+  
+}
+.ProductList{
+  min-height: 80vh;
+  width: 100vw;
+  background-color: greenyellow;
+}
+// NAVBAR
+.Navbar{
+  display: flex;
+  background-color: aqua;
+  justify-content: space-between;
+  width: 100vw;
+  height: 5vh;
+
+}  
+.Categories{
+  display: flex;
+background-color: aliceblue;
+}
+.NavbarRight{
+  display: flex;
+  flex-direction: row;
+}
+
+.AdjustButtons{
+  font-family: 'Roboto Condensed';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 18px;
+  .AttributeContainer{
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+}.AttributeButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: lightblue;
+ 
+.AttributeButton{
+
+}
+}
+  
+}
