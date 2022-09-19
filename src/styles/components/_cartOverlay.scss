@@ -1,0 +1,80 @@
+.CartOverlay{
+    background-color: white;
+    position: absolute;
+    right: 2vw;
+    width: 325px;
+    z-index: 3;
+    // height: 677px;
+    // width: 25vw;
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-bottom: 2%;
+    .CartProduct{
+      display: flex;
+      height: 190px;
+    }
+    .col2{
+      .image{
+        margin-left: 8px;
+      }
+      width: 153px;
+    }
+
+    .AdjustButtons{
+      .AttrBtnColor{ 
+        width: 16px;
+        height: 16px;}
+      .AttrBtnText{
+        width: 24px;
+        height: 24px;
+        }
+    }
+    .QuantityButtons{
+      div{
+        width: 24px;
+        height: 24px;
+      }
+      
+    }
+    .image{
+      width: 121px;
+      height: 190px;
+    }
+    
+  }
+  .CartOverlayPrice{
+    display: flex;
+
+  }
+  .CartOverlayBtns{
+    display: flex;
+    justify-content: space-around;
+  }
+  .OverlayBottom{
+    div{
+      display: flex;
+      justify-content: space-between;
+    }
+    .Buttons{
+  
+      margin-top: 5%;
+      .BtnCheckout{
+        width: 140px;
+        height: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #5ECE7B;
+      }
+      a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 140px;
+        height: 43px;
+        text-decoration: none;
+        color:black;
+        border: Solid #1D1F22 1px;
+      }
+    }
+  }

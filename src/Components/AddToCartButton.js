@@ -8,10 +8,8 @@ import { handleCart } from "../HOC/handleCart";
 class AddToCartButton extends Component {
 	render() {
 		return (
-			<div>
-				<button onClick={() => this.props.click()}>
-					{this.props.isInCart ? "remove" : "add"}
-				</button>
+			<div className="AddToCart" onClick={() => this.props.click()}>
+				{this.props.isInCart ? "remove" : "add"}
 			</div>
 		);
 	}

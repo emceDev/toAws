@@ -1,8 +1,225 @@
-.Categories{
+.App{
     font-family: 'Raleway';
-font-style: normal;
-font-weight: 400;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16
+}
+.AttributeButtonText{
+    font-family: 'Source Sans Pro';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 160%;
+}
+.Pnames{
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 27px;
+    .PId{
+        font-weight: 400;
+    }
+}
+
+.ProductList{
+    .ProductNames{
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 160%;
+    }
+    .Price{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 160%;
+    }
+}
+.Navbar{
+    .Categories{
+        
+    
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #1D1F22;
+    }
+    .selected{
+        font-weight: 600;
+        color: #5ECE7B;
+    
+    }
+}
+.CurrencySwitcher{
+    
+
+font-weight: 500;
+font-size: 18px;
+line-height: 160%;
+}
+.MyBag{
+    
+
+font-weight: 700;
 font-size: 16px;
+line-height: 160%;
+.PName{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 160%;
+}
+.AdjustAttributeId{
+    
+
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+}
+.Quantity{
+    
+
+font-weight: 500;
+font-size: 16px;
+line-height: 160%;
+}
+.Total{
+    font-family: 'Roboto';
+
+font-weight: 500;
+font-size: 16px;
+line-height: 18px;
+}
+.BottomButtons{
+    
+
+font-weight: 600;
+font-size: 14px;
 line-height: 120%;
-color: #1D1F22;
+}
+.BottomButtonsPrice{
+    
+
+font-weight: 700;
+font-size: 16px;
+line-height: 160%;
+}
+}
+.ProductDetails{
+    .PName{
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 27px;
+    }
+    .PId{
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 27px;
+    }
+    .AttrName{
+        font-family: 'Roboto Condensed';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 18px;
+    }
+    .AttrBtnText{   
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 18px;
+    }
+    p{
+        font-family: 'Roboto Condensed';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 18px;
+    }
+    .price{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 18px;
+    }
+    .AddToCart{
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 120%;
+        text-transform: uppercase;
+    }}
+    
+.Description{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 159.96%;
+}
+.Cart{
+    .PName{
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 27px;
+    }
+    .PId{
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 27px;
+    }
+    .Price{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 24px;
+    }
+    .AttrName{
+        font-size: 16px;
+        line-height: 18px;
+        letter-spacing: 0.05em;
+    }
+    .Quantity{
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 160%;
+    }
+    .Bottom{
+        .left{
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28px;
+        }
+        .right{
+            font-weight: 400;
+        }
+        .Order{
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 120%;
+        }
+    }
+}
+.CartOverlay{
+    h1{
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 160%;
+        text-transform: uppercase;
+    }
+    .PName{
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 160%;
+    }
+    .Price{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 160%;
+    }
+    .AttributeContainer *{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .QuantityButtons p{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 160%;
+    }
+    .OverlayBottom{
+        color:white;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 120%;
+    }
 }

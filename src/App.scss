@@ -9,5 +9,8 @@
 @use "./styles/components/quantityButtons";
 @use "./styles/components/price";
 @use "./styles/components/productCard";
-// use typography
+@use "./styles//components/addToCart";
 @use "./styles/typography/general";
+@use "./styles/components/cartProduct";
+@use "./styles/components/cartOverlay";
+@use "./styles/components/overlays"

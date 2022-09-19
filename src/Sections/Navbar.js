@@ -1,11 +1,15 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import Cart from "./Cart";
-import Categories from "./Categories";
-import CurrencySwitcher from "./CurrencySwitcher";
+import Categories from "../Components/Categories";
+import CurrencySwitcher from "../Components/CurrencySwitcher";
 import navbarLogo from "../images/logoTransparent.png";
+import Cart from "./Cart";
+
 class Navbar extends Component {
-	state = { cartVisible: false };
+	constructor(props) {
+		super(props);
+		this.state = { cartVisible: false };
+	}
 	render() {
 		return (
 			<div className="Navbar">
@@ -16,7 +20,12 @@ class Navbar extends Component {
 
 				<div className="NavbarRight">
 					<CurrencySwitcher />
-					<Cart overlay={true} client={this.props.client} />
+
+					<Cart
+						myBag={true}
+						visible={this.state.cartVisible}
+						client={this.props.client}
+					/>
 				</div>
 			</div>
 		);

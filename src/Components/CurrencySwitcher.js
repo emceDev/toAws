@@ -47,10 +47,8 @@ class Switcher extends Component {
 					className="Switch"
 					onClick={() => this.setState({ shown: !this.state.shown })}
 				>
-					<div>{this.props.currenc.label}</div>
-					<div>
-						<img src={imgVectorDown} />
-					</div>
+					<div>{this.props.currenc.symbol}</div>
+					<div>{">"}</div>
 				</div>
 				<div
 					className="CurrencyList"

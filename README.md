@@ -8,63 +8,75 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Folder structure:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Sections:
+-Cart (Cart in figma)
+-ProductDetails (PDP in figma)
+-ProductList (Category in figma)
+-Navbar
+Components:
+(Components)
+HOC:
+-Higher order components containing queries
+Styles:
+-scss styles for components
+apolloState:
+-client entity for apollo
 
-### `npm test`
+# Styling
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Styles structure:
+-global style:
+.AttrBtnText{
+...previousStyles,
+width: 63px;
+height: 45px;
+}
+-style modified for component:
+.CartOverlay .AdjustButtons .AttrBtnText{
+width: 24px;
+height: 24px;
+}
 
-### `npm run build`
+# State management
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+State is kept in Apollo cache. In reactive variables and in client only fields.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+cart - cart items,
+selected currency,
+currently modified - attributes of product being modified not yet put into the cart
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+There are two client only fields:
+Product{
+isInCart- true if product is in cart (variable used when displaying inCart icon on ProductCard component)
+}
+Currency{
+selected- returns true or false if currency is selected One (used in order to display one currency everywhere)
+}
 
-### `npm run eject`
+# There are four queries:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+getCategories - fetching categories list (without products), used to display navbar buttons
+getProduct - gets specific product
+getProdFromCat - gets products from specific category
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Use Case:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Entry point is ProductList Section
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. After clicking on product user is redirected to productDetails,
+2. In product Details user can add/remove product to/from cart with selected attributes
+   a) In order to get back to the productList, user must click on green logo at navigation,
+   otherwise the cart products will reset.
+   b) User can click on cartIcon to display cartOverlay(MyBag) and:
+   modify attributes of items in cart,
+   click viewBag which will redirect user to cart from where he will be able to finish the shopping
 
-## Learn More
+# notes:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+! Cart component was used twice, once it represents cart component, and secondly it represents MyBag,
+there is boolean pushed depending where it renders. e.g <Navbar><Cart myBag={true}/></Navbar> but in <App><Cart myBag={false}/></App>.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+There is console.log left at Cart section in order to check if user can buy a product.
+I tried to use as much of apollo as I could, propably bcs its new to me, if I've known its caveats, I would rethink some parts of the app.

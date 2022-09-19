@@ -5,13 +5,14 @@ class Taxed extends Component {
 	state = {};
 
 	render() {
+		const { prices, currenc, tax } = this.props;
 		return (
 			<>
-				{this.props.prices.map((x) =>
-					x.currency.label === this.props.currenc.label ? (
+				{prices.map((x) =>
+					x.currency.label === currenc.label ? (
 						<p key={x.currency.label}>
-							{this.props.currenc.symbol}
-							{x.amount / this.props.tax}
+							{currenc.symbol}
+							{x.amount / tax}
 						</p>
 					) : null
 				)}

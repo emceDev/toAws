@@ -4,6 +4,9 @@
     height: 5vh;
     padding-left: 4vw;
     padding-right: 4vw;
+    position: relative;
+    z-index: 100;
+    background-color: white;
   }  
   .Categories{
     display: flex;

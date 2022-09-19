@@ -1,12 +1,7 @@
 .Cart{
     z-index: 1000;
-    padding-left: 10%;
-    padding-right: 10%;
-    h1{
-      font-weight: 700;
-  font-size: 32px;
-  line-height: 40px;
-    }
+    padding-left: 3%;
+    padding-right: 5%;
     .Switch{
       div{
         background: #1D1F22;
@@ -21,37 +16,34 @@
       }
    
     }
-  }
-  
+    .col1{
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .AttBtnText{
+      height: 48px;
+      width: 48px;
+    }
+    .AttrBtns{
+      justify-content: flex-start;
+    }
+    .AttributeButtonColor{
+      height: 40px;
+      width: 40px;
+    }
+    .CartProduct{
+      height: 288px;
+    }
+    .col3{
+      width: 230px;
+    }
+  } 
   .image{
     background-color: violet;
     width: 100%;
     height: 100%;
-  }
-  .imgButtons{
-  display: flex;
-  justify-content: space-evenly;
-  
-   z-index: 1000;
-   height: 10%;
-   width: 15%;
-   position: relative;
-   bottom:15%;
-   right:-75%;
-   div{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background: rgba(0, 0, 0, 0.73);
-    border: 1.5px solid #FFFFFF;
-    width: 24px;
-    height: 24px;
-    color: white;
-    text-align: center;
-   }
-   div:nth-of-type(2){
-    transform: rotate(-180deg);
-   }
   }
 
   .CartOrder{
@@ -89,51 +81,4 @@
   text-transform: uppercase;
   }
 
-
-  .CartOverlay{
-    background-color: white;
-    position: absolute;
-    right: 2vw;
-    width: 325px;
-    height: 677px;
-    // width: 25vw;
-    padding-left: 1%;
-    padding-right: 1%;
-    padding-bottom: 2%;
-    .col2{
-      padding-left: 1%;
-      padding-right: 1%;
-    }
-    .CartProduct{
-      height: 190px;
-      h1,h2{
-        font-size: 16px;
-        line-height: 160%;
-      }
-    }
-    .AdjustButtons{
-      font-weight: 400;
-     font-size: 14px;
-    line-height: 160%;
-      .AttributeButtonColor{ width: 16px;
-        height: 16px;}
-      .AttributeButtonText{
-        width: 24px;
-        height: 24px;
-        }
-    }
   
-    
-  }
-  .CartOverlayPrice{
-    display: flex;
-    background-color: aquamarine;
-  }
-  .CartOverlayBtns{
-    display: flex;
-    justify-content: space-around;
-    background-color: violet;
-    font-weight: 400;
-  font-size: 14px;
-  line-height: 160%;
-  }

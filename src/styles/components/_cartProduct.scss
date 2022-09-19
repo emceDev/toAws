@@ -1,32 +1,46 @@
-.CartProduct{
-    font-family: 'Raleway';
-    font-style: normal;
+.imgBtns{
+  display: flex;
+  justify-content: space-evenly;
+  
+   z-index: 1;
+  //  height: 10%;
+   width: fit-content;
+   position: relative;
+   bottom:15%;
+   right:-90px;
+   div{
     display: flex;
-    background-color: green;
+    align-items: center;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.73);
+    border: 1.5px solid #FFFFFF;
+    width: 24px;
+    margin-left: 8px;
+    height: 24px;
+    color: white;
+    text-align: center;
+   }
+
+}
+.CartProduct{
+    width: 100%;
+    display: flex;
     padding-bottom: 5vh;
     height: fit-content;
-    h1{
-      font-weight: 600;
-      font-size: 30px;
-      line-height: 27px;
-    }
-    h2{
-      font-weight: 400;
-      font-size: 30px;
-      line-height: 27px;
-    }
     .col1{
       width: 60%;
-      background-color: yellow;
     }
     .col2{
-      width: 5%;
+      width: 40%;
       padding-left: 2.5%;
       padding-right: 2.5%;
+      display: flex;
+      justify-content: space-evenly;
     }
-    .col3{
-      width: 40%;
+    .image{
+      width:200px;
+      height: 288px;
     }
-   
-    
   }
+
+  

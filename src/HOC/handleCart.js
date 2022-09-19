@@ -1,9 +1,8 @@
-import { makeVar, InMemoryCache, useReactiveVar } from "@apollo/client";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Component } from "react";
+import { useReactiveVar } from "@apollo/client";
+import { useEffect, useState } from "react";
 import { cartItemsVar, currentlyModified } from "../apolloState/client";
 
+// This function adds/removes product to/from cart and handles modified product
 export const handleCart = (Component) => {
 	return function WrappedComponent(props) {
 		const [isInCart, setIsInCart] = useState(false);
@@ -11,12 +10,17 @@ export const handleCart = (Component) => {
 		const currModified = useReactiveVar(currentlyModified);
 
 		useEffect(() => {
+			// firstly checks whether product is already in cart
 			let inCart = inCartCheck(props.productId);
 			setIsInCart(inCart);
 		}, [currentCart]);
+
 		useEffect(() => {
+			// Setting variable(currently modified) to default
+			// when component loads with attributes given from props
 			if (props.attributes) {
-				const modified = {
+				// console.log(props.attributes);
+				let modified = {
 					id: props.id,
 					attributes: [],
 				};
@@ -26,11 +30,14 @@ export const handleCart = (Component) => {
 				currentlyModified(modified);
 			}
 		}, []);
+
+		// simple check if product is already in cart
 		const inCartCheck = (id) => {
 			return currentCart.some((product) => product.productId === id);
 		};
+
+		// check whether pushed product is in reactive variable ? push with variable contents : push with default
 		function addRemove() {
-			// attributes handling
 			let attributes = [];
 			if (currModified.productId === props.productId) {
 				attributes = currModified.attributes;
@@ -39,6 +46,7 @@ export const handleCart = (Component) => {
 					attributes.push({ id: attr.id, value: attr.items[0].value })
 				);
 			}
+			// Adding and deleting from cart: in cart===true ? remove : push to cart
 			cartItemsVar(
 				isInCart
 					? currentCart.filter((x) => x.productId !== props.productId)

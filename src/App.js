@@ -1,13 +1,12 @@
 import "./App.scss";
 import { Component } from "react";
-import Products from "./Pages/Products";
 import { gql } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import ProductDetails from "./Components/ProductDetails";
-import Cart from "./Components/Cart";
-import CurrencySwitcher from "./Components/CurrencySwitcher";
-import Navbar from "./Components/Navbar";
+import Navbar from "./Sections/Navbar";
+import ProductList from "./Sections/ProductList";
+import ProductDetails from "./Sections/ProductDetails";
+import Cart from "./Sections/Cart";
 
 class App extends Component {
 	state = { view: false };
@@ -20,40 +19,15 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				APP
-				<Navbar showCart={() => this.setView()} client={this.props.client} />
+				<Navbar showCart={() => this.setView()} />
 				<Routes>
-					<Route
-						path="/"
-						element={
-							this.state.loading ? (
-								<p>Loading...</p>
-							) : this.state.error ? (
-								<p>Error :</p>
-							) : (
-								<Products />
-							)
-						}
-					></Route>
+					<Route path="/" element={<ProductList />}></Route>
 
-					<Route
-						path="/Cart"
-						element={
-							this.state.loading ? (
-								<p>Loading...</p>
-							) : this.state.error ? (
-								<p>Error :</p>
-							) : (
-								<Cart overlay={false} client={this.state.client} />
-							)
-						}
-					></Route>
+					<Route path="/Cart" element={<Cart myBag={false} />}></Route>
 
-					<Route
-						path="/products/:id"
-						element={<ProductDetails client={this.props.client} />}
-					></Route>
+					<Route path="/products/:id" element={<ProductDetails />}></Route>
 				</Routes>
+				<div className="OverlayDark" id="OverlayDark"></div>
 			</div>
 		);
 	}
