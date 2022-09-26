@@ -7,7 +7,6 @@ export const handleCart = (Component) => {
 	return function WrappedComponent(props) {
 		const [isInCart, setIsInCart] = useState(false);
 		const currentCart = useReactiveVar(cartItemsVar);
-		const currModified = useReactiveVar(currentlyModified);
 
 		useEffect(() => {
 			// firstly checks whether product is already in cart
@@ -15,37 +14,14 @@ export const handleCart = (Component) => {
 			setIsInCart(inCart);
 		}, [currentCart]);
 
-		useEffect(() => {
-			// Setting variable(currently modified) to default
-			// when component loads with attributes given from props
-			if (props.attributes) {
-				// console.log(props.attributes);
-				let modified = {
-					id: props.id,
-					attributes: [],
-				};
-				props.attributes.map((attr) =>
-					modified.attributes.push({ id: attr.id, value: attr.items[0].value })
-				);
-				currentlyModified(modified);
-			}
-		}, []);
-
 		// simple check if product is already in cart
 		const inCartCheck = (id) => {
 			return currentCart.some((product) => product.productId === id);
+			// //console.log("checkin if in cart", id, x);
 		};
 
 		// check whether pushed product is in reactive variable ? push with variable contents : push with default
 		function addRemove() {
-			let attributes = [];
-			if (currModified.productId === props.productId) {
-				attributes = currModified.attributes;
-			} else {
-				props.attributes.map((attr) =>
-					attributes.push({ id: attr.id, value: attr.items[0].value })
-				);
-			}
 			// Adding and deleting from cart: in cart===true ? remove : push to cart
 			cartItemsVar(
 				isInCart
@@ -54,14 +30,11 @@ export const handleCart = (Component) => {
 							...currentCart,
 							{
 								productId: props.productId,
-								count: 1,
-								attributes,
-								prices: props.prices,
 							},
 					  ]
 			);
 		}
-
+		//console.log("HANDLE CART HOC ", currentCart);
 		return (
 			<Component {...props} click={() => addRemove()} isInCart={isInCart} />
 		);

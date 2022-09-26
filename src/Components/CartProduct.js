@@ -2,7 +2,6 @@ import AdjustButtons from "./AdjustButtons";
 import QuantityButtons from "./QuantityButtons";
 import { Component } from "react";
 import Price from "./Price";
-import vector from "../images/Vector.png";
 import PNames from "./PNames";
 import { getProduct } from "../HOC/getProductDetails";
 import { Link } from "react-router-dom";
@@ -25,6 +24,7 @@ class CartProduct extends Component {
 	render() {
 		return (
 			<div className="CartProduct">
+				{console.log("cart product reload", this.props)}
 				<div className="col1">
 					<PNames
 						myBag={this.props.myBag}
@@ -34,8 +34,9 @@ class CartProduct extends Component {
 					<Price prices={this.props.data.product.prices} />
 
 					<AdjustButtons
-						id={this.props.data.product.id}
+						productId={this.props.data.product.id}
 						attributes={this.props.data.product.attributes}
+						place={"cart" + this.props.data.product.id}
 					/>
 				</div>
 

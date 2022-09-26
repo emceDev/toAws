@@ -9,7 +9,7 @@ import { getCartItems } from "../HOC/getCartItems";
 // CartOverlay is used here in the meaning of "MyBag" in figma
 // this.props.myBag: Boolean - true if cart is opened as MyBag false if opened is Cart
 class Cart extends Component {
-	state = { cartVisible: false, overlay: false };
+	state = { cartVisible: true, overlay: false };
 
 	toggleVisibility() {
 		this.setState({ cartVisible: !this.state.cartVisible });
@@ -42,7 +42,11 @@ class Cart extends Component {
 						</h1>
 						<div className="CartProducts">
 							{items.map((x) => (
-								<CartProduct myBag={myBag} item={x.productId} />
+								<CartProduct
+									myBag={myBag}
+									key={x.productId}
+									item={x.productId}
+								/>
 							))}
 						</div>
 						{/* Checks whether to load bottom part for my bag or cart */}

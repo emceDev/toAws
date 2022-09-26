@@ -21,7 +21,7 @@ class ProductDetails extends Component {
 		let e = document.getElementsByClassName("Description")[0];
 		let x = e.childNodes.length === 0 ? "" : e.childNodes;
 		e.innerHTML = html;
-		console.log(x);
+		// //console.log(x);
 		// return e;
 		return;
 	}
@@ -46,7 +46,12 @@ class ProductDetails extends Component {
 					<div className="Text">
 						<PNames name={brand} id={id} />
 
-						<AdjustButtons id={id} attributes={attributes} />
+						<AdjustButtons
+							productId={id}
+							attributes={attributes}
+							place="Details"
+							client={this.props.client}
+						/>
 						<div>
 							<p>PRICE:</p>
 							<Price prices={prices} />

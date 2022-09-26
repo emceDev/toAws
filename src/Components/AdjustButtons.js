@@ -1,137 +1,109 @@
 import { Component } from "react";
-import { handleCart } from "./AddToCartButton";
-import { makeVar, InMemoryCache, useReactiveVar } from "@apollo/client";
+import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect } from "react";
 import { useState } from "react";
 import { cartItemsVar, currentlyModified } from "../apolloState/client";
 
+const GET_MODIFIED = gql`
+	query getModified {
+		modified @client {
+			productId
+			attributes {
+				attrId
+				attrValue
+			}
+		}
+	}
+`;
+const GET_PRODUCT_ATTS = gql`
+	query getAtts($pid: String!) {
+		product(id: $pid) {
+			setAttrs {
+				attrId
+				attrValue
+			}
+		}
+	}
+`;
 const selectAttributes = (Component) => {
 	return function WrappedComponent(props) {
-		const [isInCart, setIsInCart] = useState(false);
-		const [selected, setSelected] = useState(null);
-		const currentCart = useReactiveVar(cartItemsVar);
-		const currModified = useReactiveVar(currentlyModified);
-		// let count = 1;
+		const getAttrs = useQuery(GET_PRODUCT_ATTS, {
+			variables: { pid: props.productId },
+		});
+		const attrs = getAttrs.data.product.setAttrs;
 
-		function modify(prodId, attrId, attrValue) {
-			currentCart.map((p) => p.productId === prodId);
-			// checks if product is in cart
-			const inCartCheck = (id) => {
-				return currentCart.some((product) => product.productId === id);
-			};
-
-			// value of the new cart
-			const newCart = currentCart.map((prod) =>
-				prod.productId === prodId
-					? compareAttrs(prodId, attrId, attrValue, prod.count, prod.prices)
-					: prod
-			);
-			// value in reactive variable
-			const newVariable = compareAttrs(prodId, attrId, attrValue);
-			// checks if modified product is in cart
-			// modifies in cart
-			// modifies in variable
-			inCartCheck(prodId)
-				? newCart.map((x) => (x.productId === prodId ? setSelected(x) : null))
-				: setSelected(newVariable);
-			return inCartCheck(prodId)
-				? cartItemsVar(newCart)
-				: currentlyModified(newVariable);
+		function handleWrite(data) {
+			// console.log("writting", data);
+			return props.client.writeFragment({
+				id: "Product:" + props.productId,
+				fragment: gql`
+					fragment Prod on Product {
+						setAttrs {
+							attrId
+							attrValue
+						}
+					}
+				`,
+				data: { setAttrs: data },
+			});
 		}
 
-		// compares array of attributes in variable and passed from component
-		// if ids match, returns attributes
-		// returns product object with updated attributes
-		function compareAttrs(prodId, attrId, attrValue, count = 1, prices) {
-			let attrs = currModified.attributes.map((attr) =>
-				attrId === attr.id ? { id: attrId, value: attrValue, prices } : attr
+		const modify = (attrId, attrValue) => {
+			let nA = [];
+			attrs.map((attr) =>
+				attr.attrId === attrId
+					? nA.push({ attrId: attrId, attrValue: attrValue })
+					: nA.push(attr)
 			);
+			handleWrite(nA);
+		};
 
-			return {
-				productId: prodId,
-				attributes: attrs,
-				count: count,
-				prices: prices,
-			};
+		if (attrs !== null) {
+			return (
+				<Component
+					{...props}
+					setAttrs={attrs}
+					modify={(prodId, attrId, attrValue) => {
+						modify(prodId, attrId, attrValue);
+					}}
+				/>
+			);
+		} else {
+			return <p onClick={() => console.log(attrs)}>loading attributes</p>;
 		}
-		return (
-			<Component
-				{...props}
-				selected={selected}
-				isInCart={isInCart}
-				modify={(prodId, attrId, attrValue) => {
-					modify(prodId, attrId, attrValue);
-				}}
-
-				// count={count}
-				// quantity={(sign	) => quantity(sign)}
-			/>
-		);
 	};
 };
 
 class AdjustButtons extends Component {
-	// state = { active: null };
-
-	light(id, value, name, index) {
-		// console.log("lightenenign");
-		// console.log(id, value, name);
-		let clName = name === "Color" ? "AttrBtnColor" : "AttrBtnText";
-		return clName;
-		const selected = this.props.selected;
-		// check if any selected
-		if (selected !== null) {
-			// check if selected id===prod id
-			if (selected.productId === this.props.id) {
-				console.log(selected);
-				// checks whether attribute is selected one
-				let z = selected.attributes.some(
-					(a) => a.id === id && a.value === value
-				);
-				return z ? "active" : "inactive";
-				console.log(z);
-			}
-		}
-
-		// if (this.props.selected !== null) {
-		// 	const prod = this.props.selected;
-		// 	let sId = prod.productId;
-		// 	let pId = this.props.id;
-		// 	let attr = prod.attributes;
-		// 	let iSm = sId === pId;
-		// 	if (iSm === true) {
-		// 		attr.some((a) =>
-		// 			a.value === value ? (active = active + " active") : active
-		// 		);
-		// 		return active;
-		// 	}
-		// } else if (this.props.selected === null && index === 0) {
-		// 	// console.log(index, clName);
-		// 	return clName + " active";
-		// } else {
-		// 	return clName;
-		// }
+	constructor(props) {
+		super(props);
 	}
+	light(id, value, name) {
+		// console.log("ligh", this.props.setAttrs.setAttrs);
+		let clName = name === "Color" ? "AttrBtnColor" : "AttrBtnText";
+		const selected = this.props.setAttrs;
+		let z = selected.some((a) => a.attrId === id && a.attrValue === value);
+
+		return z ? clName + " active" : clName;
+	}
+
 	render() {
 		return (
 			<div className="AdjustButtons">
-				{/* {console.log(this.props.selected)} */}
+				{console.log("in class", this.props)}
 				{this.props.attributes
 					? this.props.attributes.map((attr) => {
 							return (
-								<div key={attr.id} className="AttributeContainer">
+								<div
+									key={attr.id + this.props.productId}
+									className="AttributeContainer"
+								>
 									<div className="AttrName">{attr.name}</div>
 									<div className="AttrBtns">
 										{attr.items.map((item, index) => {
 											return (
 												<div
-													onClick={() =>
-														this.props.modify(
-															this.props.id,
-															attr.id,
-															item.value
-														)
-													}
+													onClick={() => this.props.modify(attr.id, item.value)}
 													className={this.light(
 														attr.id,
 														item.value,
@@ -160,3 +132,51 @@ class AdjustButtons extends Component {
 }
 
 export default selectAttributes(AdjustButtons);
+
+const x = {
+	// useEffect(() => {
+	// 	if (selected === null) {
+	// 		let def = [];
+	// 		props.attributes.map((attr) =>
+	// 			def.push({ attrId: attr.id, attrValue: attr.items[0].value })
+	// 		);
+	// 		//console.log("DEFAULTS", def);
+	// 		setSelected(def);
+	// 		// Setting variable(currently modified) to default
+	// 		// when component loads with attributes given from props
+	// 		currentlyModified({ productId: props.productId, attributes: def });
+	// 	}
+	// }, []);
+	// useEffect(() => {
+	// 	console.log("modified changed", currModified.attributes[0]);
+	// 	setSelected(currModified);
+	// }, [currModified]);
+	// // useEffect(() => {}, [currModified]);
+	// function modify(prodId, attrId, attrValue) {
+	// 	// console.log(props);
+	// 	console.log("Modyfing:", { attrId, attrValue });
+	// 	if (currentCart.length > 0) {
+	// 		console.log("modify 1st");
+	// 		// check in cart
+	// 	} else if (currModified.productId === prodId) {
+	// 		// modify currMOdified
+	// 		console.log("modify 2nd");
+	// 		let x = currModified.attributes.map((attr) =>
+	// 			attrId === attr.attrId
+	// 				? { attrId: attrId, attrValue: attrValue }
+	// 				: attr
+	// 		);
+	// 		// this does not update immiadetely
+	// 		currentlyModified({ productId: prodId, attributes: x });
+	// 		console.log("MODIFIED:", currModified.attributes[0]);
+	// 		setSelected(currModified.attributes);
+	// 	} else {
+	// 		console.log("modify 3rd");
+	// 		let def = [];
+	// 		props.attributes.map((attr) =>
+	// 			def.push({ attrId: attr.id, attrValue: attr.items[0].value })
+	// 		);
+	// 		currentlyModified({ productId: props.productId, attributes: def });
+	// 	}
+	// }
+};
