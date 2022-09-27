@@ -24,7 +24,6 @@ class CartProduct extends Component {
 	render() {
 		return (
 			<div className="CartProduct">
-				{console.log("cart product reload", this.props)}
 				<div className="col1">
 					<PNames
 						myBag={this.props.myBag}
@@ -37,11 +36,16 @@ class CartProduct extends Component {
 						productId={this.props.data.product.id}
 						attributes={this.props.data.product.attributes}
 						place={"cart" + this.props.data.product.id}
+						client={this.props.client}
 					/>
 				</div>
 
 				<div className="col2">
-					<QuantityButtons id={this.props.data.product.id} />
+					<QuantityButtons
+						id={this.props.data.product.id}
+						client={this.props.client}
+						inCartQuantity={this.props.data.product.inCartQuantity}
+					/>
 					<div className="image">
 						<Link to={`/products/${this.props.data.product.id}`}>
 							<img

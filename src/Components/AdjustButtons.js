@@ -4,21 +4,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { cartItemsVar, currentlyModified } from "../apolloState/client";
 
-const GET_MODIFIED = gql`
-	query getModified {
-		modified @client {
-			productId
-			attributes {
-				attrId
-				attrValue
-			}
-		}
-	}
-`;
-const GET_PRODUCT_ATTS = gql`
-	query getAtts($pid: String!) {
+const GET_PRODUCT_ATTRS = gql`
+	query getAttrs($pid: String!) {
 		product(id: $pid) {
-			setAttrs {
+			setAttrs @client {
 				attrId
 				attrValue
 			}
@@ -27,13 +16,20 @@ const GET_PRODUCT_ATTS = gql`
 `;
 const selectAttributes = (Component) => {
 	return function WrappedComponent(props) {
-		const getAttrs = useQuery(GET_PRODUCT_ATTS, {
+		const getAttrs = useQuery(GET_PRODUCT_ATTRS, {
 			variables: { pid: props.productId },
 		});
-		const attrs = getAttrs.data.product.setAttrs;
+		const [attrs, setAttrs] = useState(null);
+
+		useEffect(() => {
+			if (getAttrs.data === undefined) {
+			} else {
+				setAttrs(getAttrs.data.product.setAttrs);
+			}
+		}, [getAttrs]);
 
 		function handleWrite(data) {
-			// console.log("writting", data);
+			console.log("writing", data, props);
 			return props.client.writeFragment({
 				id: "Product:" + props.productId,
 				fragment: gql`
@@ -55,7 +51,7 @@ const selectAttributes = (Component) => {
 					? nA.push({ attrId: attrId, attrValue: attrValue })
 					: nA.push(attr)
 			);
-			handleWrite(nA);
+			return handleWrite(nA);
 		};
 
 		if (attrs !== null) {
@@ -69,7 +65,7 @@ const selectAttributes = (Component) => {
 				/>
 			);
 		} else {
-			return <p onClick={() => console.log(attrs)}>loading attributes</p>;
+			return <p onClick={() => console.log(getAttrs)}>loading attributes</p>;
 		}
 	};
 };
@@ -79,7 +75,6 @@ class AdjustButtons extends Component {
 		super(props);
 	}
 	light(id, value, name) {
-		// console.log("ligh", this.props.setAttrs.setAttrs);
 		let clName = name === "Color" ? "AttrBtnColor" : "AttrBtnText";
 		const selected = this.props.setAttrs;
 		let z = selected.some((a) => a.attrId === id && a.attrValue === value);
@@ -90,7 +85,6 @@ class AdjustButtons extends Component {
 	render() {
 		return (
 			<div className="AdjustButtons">
-				{console.log("in class", this.props)}
 				{this.props.attributes
 					? this.props.attributes.map((attr) => {
 							return (

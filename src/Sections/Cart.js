@@ -13,13 +13,13 @@ class Cart extends Component {
 
 	toggleVisibility() {
 		this.setState({ cartVisible: !this.state.cartVisible });
-
 		document.getElementById("OverlayDark").style.display = !this.state
 			.cartVisible
 			? "none"
 			: "block";
 	}
 	render() {
+		// console.log(this.props);
 		const { myBag, items, totalPrices, quantity } = this.props;
 		return (
 			<div className="Cart">
@@ -34,7 +34,9 @@ class Cart extends Component {
 				{/* END OF SWITCH */}
 				<div
 					className={myBag ? "CartOverlay" : "Cart"}
-					style={{ display: this.state.cartVisible ? "none" : "block" }}
+					style={{
+						display: this.state.cartVisible && myBag ? "none" : "block",
+					}}
 				>
 					<div>
 						<h1>
@@ -46,6 +48,7 @@ class Cart extends Component {
 									myBag={myBag}
 									key={x.productId}
 									item={x.productId}
+									client={this.props.client}
 								/>
 							))}
 						</div>

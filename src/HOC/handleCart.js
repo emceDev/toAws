@@ -1,40 +1,63 @@
-import { useReactiveVar } from "@apollo/client";
+import { gql, useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { cartItemsVar, currentlyModified } from "../apolloState/client";
+import { cartProductsVar } from "../apolloState/client";
 
+// one here
+const GET_PD_FOR_CART = gql`
+	query GetProductForCart($pid: String!) {
+		product(id: $pid) {
+			id
+			inStock
+			attributes {
+				id
+				items {
+					value
+					id
+				}
+			}
+			setAttrs @client {
+				attrId
+				attrValue
+			}
+			isInCart @client
+			cartQuantity @client
+			prices {
+				currency {
+					symbol
+					label
+				}
+				amount
+			}
+		}
+	}
+`;
 // This function adds/removes product to/from cart and handles modified product
 export const handleCart = (Component) => {
 	return function WrappedComponent(props) {
+		const currentCart = useReactiveVar(cartProductsVar);
 		const [isInCart, setIsInCart] = useState(false);
-		const currentCart = useReactiveVar(cartItemsVar);
+		const product = useQuery(GET_PD_FOR_CART, {
+			variables: { pid: props.productId },
+		});
 
 		useEffect(() => {
-			// firstly checks whether product is already in cart
-			let inCart = inCartCheck(props.productId);
-			setIsInCart(inCart);
-		}, [currentCart]);
-
-		// simple check if product is already in cart
-		const inCartCheck = (id) => {
-			return currentCart.some((product) => product.productId === id);
-			// //console.log("checkin if in cart", id, x);
-		};
-
+			if (product.data !== undefined) {
+				setIsInCart(product.data.product.isInCart);
+			}
+		}, [product]);
 		// check whether pushed product is in reactive variable ? push with variable contents : push with default
 		function addRemove() {
+			console.log("addremove");
+			const isInCart = product.data.product.isInCart;
+
 			// Adding and deleting from cart: in cart===true ? remove : push to cart
-			cartItemsVar(
+			cartProductsVar(
 				isInCart
 					? currentCart.filter((x) => x.productId !== props.productId)
-					: [
-							...currentCart,
-							{
-								productId: props.productId,
-							},
-					  ]
+					: [...currentCart, product.data.product]
 			);
 		}
-		//console.log("HANDLE CART HOC ", currentCart);
 		return (
 			<Component {...props} click={() => addRemove()} isInCart={isInCart} />
 		);

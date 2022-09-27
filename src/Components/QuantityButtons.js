@@ -1,38 +1,35 @@
-import { useReactiveVar } from "@apollo/client";
+import { gql, useReactiveVar } from "@apollo/client";
 import { Component, useState } from "react";
 import { cartItemsVar, currentlyModified } from "../apolloState/client";
 import { handleCart } from "./AddToCartButton";
 
 const setCount = (Component) => {
 	return function WrappedComponent(props) {
-		const currentCart = useReactiveVar(cartItemsVar);
 		const [countO, setCountO] = useState(1);
-		const newCount = (attrValue, prod) => {
-			const number = attrValue ? prod + 1 : prod - 1 <= 0 ? prod : prod - 1;
-			setCountO(number);
-			return number;
-		};
-		function count(prodId, attrValue) {
-			const nCart = currentCart.map((prod) =>
-				prod.productId === prodId
-					? {
-							productId: prod.productId,
-							count: newCount(attrValue, prod.count),
-							attributes: prod.attributes,
-							prices: prod.prices,
-					  }
-					: prod
-			);
 
-			cartItemsVar(nCart);
+		const q = props.inCartQuantity;
+
+		const count = (attrValue) => {
+			const number = attrValue ? q + 1 : q - 1 <= 0 ? q : q - 1;
+			handleWrite(number);
+		};
+		function handleWrite(number) {
+			return props.client.writeFragment({
+				id: "Product:" + props.id,
+				fragment: gql`
+					fragment quantity on Product {
+						inCartQuantity
+					}
+				`,
+				data: { inCartQuantity: number },
+			});
 		}
 		return (
 			<Component
 				{...props}
-				counter={(prodId, attrId, attrValue) => {
-					count(prodId, attrId, attrValue);
+				counter={(attrValue) => {
+					count(attrValue);
 				}}
-				number={countO}
 			/>
 		);
 	};
@@ -48,15 +45,15 @@ class QuantityButtons extends Component {
 			<div className="QuantityButtons">
 				<div
 					onClick={() => {
-						this.props.counter(this.props.id, true);
+						this.props.counter(true);
 					}}
 				>
 					+
 				</div>
-				<p>{this.props.number}</p>
+				<p>{this.props.inCartQuantity}</p>
 				<div
 					onClick={() => {
-						this.props.counter(this.props.id, false);
+						this.props.counter(false);
 					}}
 				>
 					-

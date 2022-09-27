@@ -6,6 +6,7 @@ import PNames from "../Components/PNames";
 import { getProduct } from "../HOC/getProductDetails";
 import { sanitize } from "dompurify";
 import Imgs from "../Components/Imgs";
+
 class ProductDetails extends Component {
 	constructor() {
 		super();
@@ -26,7 +27,7 @@ class ProductDetails extends Component {
 		return;
 	}
 	render() {
-		const { id, gallery, brand, attributes, prices, description } =
+		const { id, gallery, brand, attributes, prices, description, isInCart } =
 			this.props.data.product;
 		return (
 			<>
@@ -60,8 +61,8 @@ class ProductDetails extends Component {
 						<div>
 							<AddToCartButton
 								productId={id}
-								attributes={attributes}
-								prices={prices}
+								isInCart={isInCart}
+								addRemove={this.props.addRemove}
 							/>
 						</div>
 						<div className="Description">

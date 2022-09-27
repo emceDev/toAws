@@ -15,8 +15,6 @@ class App extends Component {
 	state = { view: false };
 
 	setView() {
-		//console.log("invoked");
-		//console.log(this.state.view);
 		// this.setState({ view: !this.state.view });
 		this.props.client.cache.writeQuery({
 			query: gql`
@@ -48,11 +46,14 @@ class App extends Component {
 
 				{/* <Sis />
 				<Son /> */}
-				<Navbar showCart={() => this.setView()} client={this.propsclient} />
+				<Navbar showCart={() => this.setView()} client={this.props.client} />
 				<Routes>
 					<Route path="/" element={<ProductList />}></Route>
 
-					<Route path="/Cart" element={<Cart myBag={false} />}></Route>
+					<Route
+						path="/Cart"
+						element={<Cart myBag={false} client={this.props.client} />}
+					></Route>
 
 					<Route
 						path="/products/:id"

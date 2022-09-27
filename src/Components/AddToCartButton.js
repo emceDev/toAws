@@ -8,11 +8,11 @@ import { handleCart } from "../HOC/handleCart";
 class AddToCartButton extends Component {
 	render() {
 		return (
-			<div className="AddToCart" onClick={() => this.props.click()}>
+			<div className="AddToCart" onClick={this.props.addRemove}>
 				{this.props.isInCart ? "remove" : "add"}
 			</div>
 		);
 	}
 }
 
-export default handleCart(AddToCartButton);
+export default AddToCartButton;

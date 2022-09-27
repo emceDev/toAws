@@ -7,6 +7,18 @@ import {
 } from "@apollo/client";
 
 // products in cart
+const cartItem = {
+	productId: "id",
+	quantity: "quantity",
+	prices: { amount: "123", currency: { symbol: "usd" } },
+	setAttributes: ["array"],
+};
+export const cartProductsVar = makeVar([]);
+const summary = {
+	total: "map cart products",
+	quantity: "list of cart products",
+};
+export const cartSummary = makeVar([]);
 export const cartItemsVar = makeVar([]);
 
 // default currency
@@ -16,17 +28,13 @@ export const selectedCurrencyVar = makeVar({
 });
 
 // product being modified not yet put into the cart
-export const currentlyModified = makeVar();
 
 // selected category
 export const currentCategoryVar = makeVar("tech");
 
 // tax value, as it differs depending on country
 export const taxVar = makeVar(25);
-const defExpam = [
-	{ id: "color", value: "blue" },
-	{ id: "size", value: "m" },
-];
+
 // isInCart - true if product is in cart (variable used when displaying inCart icon on ProductCard component)
 // selected - returns true or false if currency is selected One (used in order to display one currency everywhere)
 const cache = new InMemoryCache({
@@ -37,25 +45,10 @@ const cache = new InMemoryCache({
 					// compares if any of cart items possess same id as product used in <ProductCard/>
 					read(_, { readField }) {
 						const productId = readField("id");
-						//console.log("client", productId);
-						let z = cartItemsVar().some((x) => x.productId === productId);
-						//console.log("client", z);
+
+						let z = cartProductsVar().some((x) => x.productId === productId);
+						console.log("is incart", z);
 						return z;
-					},
-				},
-				selected: {
-					// compares if any of cart items possess same id as product used in <ProductCard/>
-					read() {
-						return "ATTRIBUTES";
-					},
-				},
-				text: {
-					read(value = "xd") {
-						return value;
-					},
-					merge(existing = [], incoming) {
-						console.log("merging on product", existing, incoming);
-						return [...existing, incoming];
 					},
 				},
 				setAttrs: {
@@ -67,15 +60,21 @@ const cache = new InMemoryCache({
 								let value = readField("items", ref)[0].value;
 								defs.push({ attrId: id, attrValue: value });
 							});
-							console.log("defaults from attrs");
+							console.log("returning defaults");
 							return defs;
+						} else {
+							console.log("returning normal", setAttrs);
+							return setAttrs;
 						}
-						console.log("returning normal");
-						return setAttrs;
 					},
 					merge(setAttrs = [], incoming) {
 						console.log("merging on product", setAttrs, "incoming ", incoming);
 						return incoming;
+					},
+				},
+				inCartQuantity: {
+					read(quantity = 1) {
+						return quantity;
 					},
 				},
 			},
@@ -96,43 +95,14 @@ const cache = new InMemoryCache({
 				cart: {
 					// compares if any of cart items possess same id as product used in <ProductCard/>
 					read() {
-						console.log(cartItemsVar());
-						return cartItemsVar();
-					},
-				},
-				modified: {
-					// compares if any of cart items possess same id as product used in <ProductCard/>
-					read() {
-						console.log(currentlyModified());
-						return currentlyModified();
-					},
-				},
-				todo: {
-					read() {
-						return "XD";
-					},
-					merge(existing = [], incoming) {
-						console.log(incoming);
-						return [...existing, ...incoming];
-					},
-				},
-
-				text: {
-					merge(existing = [], incoming) {
-						console.log("merging", existing, incoming);
-						return [...existing, incoming];
+						console.log("client", cartProductsVar());
+						return cartProductsVar();
 					},
 				},
 			},
 		},
 	},
 });
-
-//https://www.w3resource.com/apollo-graphql/local-state-management-apollo-client.php
-// https://www.apollographql.com/docs/react/api/cache/InMemoryCache/#writequery
-// Local state in Apollo cache ctrl+f
-// https://levelup.gitconnected.com/storing-local-data-with-apollo-client-dffc304efdfc
-// https://adhithiravi.medium.com/graphql-mutations-and-caching-using-apollo-client-46294d3350ab
 
 export const client = new ApolloClient({
 	uri: "http://localhost:4000",
