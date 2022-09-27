@@ -58,10 +58,8 @@ export const getProduct = (Component) => {
 			const toCartData = {
 				productId: p.id,
 				prices: p.prices,
-				setAttrs: p.setAttrs,
-				inCartQuantity: p.inCartQuantity,
+				inCartQuantity: 1,
 			};
-			// console.log("adding product with:", toCartData);
 			cartProductsVar(
 				p.isInCart
 					? currentCart.filter((x) => x.productId !== p.id)

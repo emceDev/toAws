@@ -6,7 +6,7 @@ class CartOverlayBottom extends Component {
 	state = {};
 	render() {
 		return (
-			<div className="OverlayBottom">
+			<div className="OverlayBottom" style={{ color: "black" }}>
 				<div>
 					Total:
 					<Price prices={this.props.totalPrices} />

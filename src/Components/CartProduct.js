@@ -42,9 +42,9 @@ class CartProduct extends Component {
 
 				<div className="col2">
 					<QuantityButtons
-						id={this.props.data.product.id}
+						productId={this.props.data.product.id}
 						client={this.props.client}
-						inCartQuantity={this.props.data.product.inCartQuantity}
+						inCartQuantity={this.props.inCartQuantity}
 					/>
 					<div className="image">
 						<Link to={`/products/${this.props.data.product.id}`}>

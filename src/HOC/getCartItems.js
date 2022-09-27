@@ -17,8 +17,7 @@ export const getCartItems = (Component) => {
 		const { data, loading, error } = useQuery(GET_CART);
 		const cart = data.cart;
 		useEffect(() => {
-			console.log("Cart change", cart);
-			return cart !== undefined ? sum() : console.log("empy");
+			return cart !== undefined ? sum() : null;
 		}, [cart]);
 
 		const sum = () => {
@@ -41,7 +40,6 @@ export const getCartItems = (Component) => {
 						)
 					);
 				});
-				console.log("total", amounts);
 				return setTotalPrices(amounts);
 			} else {
 			}
@@ -50,7 +48,6 @@ export const getCartItems = (Component) => {
 		if (cart.length !== 0) {
 			return (
 				<>
-					<p>asd</p>
 					<Component
 						{...props}
 						items={cart}

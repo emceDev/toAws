@@ -45,11 +45,8 @@ export const Tada = (props) => {
 				}
 			`,
 		});
-		function read() {
-			console.log(frag);
-		}
+		function read() {}
 		function handleWrite() {
-			console.log("writting");
 			props.client.writeFragment({
 				id: "Product:ps-5",
 				fragment: gql`
@@ -67,7 +64,6 @@ export const Tada = (props) => {
 					},
 				},
 			});
-			console.log(frag);
 		}
 		function handleUpdate() {
 			cache.modify({

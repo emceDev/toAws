@@ -47,7 +47,6 @@ const cache = new InMemoryCache({
 						const productId = readField("id");
 
 						let z = cartProductsVar().some((x) => x.productId === productId);
-						console.log("is incart", z);
 						return z;
 					},
 				},
@@ -60,15 +59,12 @@ const cache = new InMemoryCache({
 								let value = readField("items", ref)[0].value;
 								defs.push({ attrId: id, attrValue: value });
 							});
-							console.log("returning defaults");
 							return defs;
 						} else {
-							console.log("returning normal", setAttrs);
 							return setAttrs;
 						}
 					},
 					merge(setAttrs = [], incoming) {
-						console.log("merging on product", setAttrs, "incoming ", incoming);
 						return incoming;
 					},
 				},
@@ -95,7 +91,6 @@ const cache = new InMemoryCache({
 				cart: {
 					// compares if any of cart items possess same id as product used in <ProductCard/>
 					read() {
-						console.log("client", cartProductsVar());
 						return cartProductsVar();
 					},
 				},
@@ -108,20 +103,3 @@ export const client = new ApolloClient({
 	uri: "http://localhost:4000",
 	cache: cache,
 });
-
-// WORKIGN ATTRs
-// setAttrs: {
-// 	read(setAttrs = [], { readField }) {
-// 		const defs = [];
-// 		readField("attributes").map((ref) => {
-// 			let id = ref.__ref.replace("AttributeSet:", "");
-// 			let value = readField("items", ref)[0].value;
-// 			setAttrs.push({ id: id, value: value });
-// 		});
-// 		return setAttrs;
-// 	},
-// 	merge(existing = [], incoming) {
-// 		console.log("merging on product", existing, incoming);
-// 		return [...existing, incoming];
-// 	},
-// },

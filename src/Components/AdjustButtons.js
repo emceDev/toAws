@@ -29,7 +29,6 @@ const selectAttributes = (Component) => {
 		}, [getAttrs]);
 
 		function handleWrite(data) {
-			console.log("writing", data, props);
 			return props.client.writeFragment({
 				id: "Product:" + props.productId,
 				fragment: gql`
@@ -65,7 +64,7 @@ const selectAttributes = (Component) => {
 				/>
 			);
 		} else {
-			return <p onClick={() => console.log(getAttrs)}>loading attributes</p>;
+			return <p>loading attributes</p>;
 		}
 	};
 };
@@ -126,51 +125,3 @@ class AdjustButtons extends Component {
 }
 
 export default selectAttributes(AdjustButtons);
-
-const x = {
-	// useEffect(() => {
-	// 	if (selected === null) {
-	// 		let def = [];
-	// 		props.attributes.map((attr) =>
-	// 			def.push({ attrId: attr.id, attrValue: attr.items[0].value })
-	// 		);
-	// 		//console.log("DEFAULTS", def);
-	// 		setSelected(def);
-	// 		// Setting variable(currently modified) to default
-	// 		// when component loads with attributes given from props
-	// 		currentlyModified({ productId: props.productId, attributes: def });
-	// 	}
-	// }, []);
-	// useEffect(() => {
-	// 	console.log("modified changed", currModified.attributes[0]);
-	// 	setSelected(currModified);
-	// }, [currModified]);
-	// // useEffect(() => {}, [currModified]);
-	// function modify(prodId, attrId, attrValue) {
-	// 	// console.log(props);
-	// 	console.log("Modyfing:", { attrId, attrValue });
-	// 	if (currentCart.length > 0) {
-	// 		console.log("modify 1st");
-	// 		// check in cart
-	// 	} else if (currModified.productId === prodId) {
-	// 		// modify currMOdified
-	// 		console.log("modify 2nd");
-	// 		let x = currModified.attributes.map((attr) =>
-	// 			attrId === attr.attrId
-	// 				? { attrId: attrId, attrValue: attrValue }
-	// 				: attr
-	// 		);
-	// 		// this does not update immiadetely
-	// 		currentlyModified({ productId: prodId, attributes: x });
-	// 		console.log("MODIFIED:", currModified.attributes[0]);
-	// 		setSelected(currModified.attributes);
-	// 	} else {
-	// 		console.log("modify 3rd");
-	// 		let def = [];
-	// 		props.attributes.map((attr) =>
-	// 			def.push({ attrId: attr.id, attrValue: attr.items[0].value })
-	// 		);
-	// 		currentlyModified({ productId: props.productId, attributes: def });
-	// 	}
-	// }
-};

@@ -1,7 +1,49 @@
-import { Component } from "react";
+import { gql } from "@apollo/client";
+import { Component, useEffect } from "react";
 import Price from "./Price";
 import Taxed from "./Taxed";
 
+const readyOrder = (Component) => {
+	return function WrappedComponent(props) {
+		function readFragment(productId) {
+			return props.client.readFragment({
+				id: "Product:" + productId,
+				fragment: gql`
+					fragment Proddc on Product {
+						setAttrs {
+							attrId
+							attrValue
+						}
+						prices {
+							currency {
+								symbol
+								label
+							}
+							amount
+						}
+					}
+				`,
+			});
+		}
+
+		function order() {
+			let cartToBuy = [];
+			props.items.map((p) =>
+				cartToBuy.push({
+					...readFragment(p.productId),
+					quantity: p.inCartQuantity,
+					id: p.productId,
+				})
+			);
+			console.log("Ordered: ", cartToBuy);
+		}
+		return (
+			<>
+				<Component {...props} order={order} />
+			</>
+		);
+	};
+};
 class CartOrder extends Component {
 	state = {};
 	render() {
@@ -24,11 +66,11 @@ class CartOrder extends Component {
 						)}
 					</div>
 				</div>
-				<div className="ButtonOrder" onClick={() => console.log(items)}>
+				<div className="ButtonOrder" onClick={this.props.order}>
 					Button order
 				</div>
 			</div>
 		);
 	}
 }
-export default CartOrder;
+export default readyOrder(CartOrder);

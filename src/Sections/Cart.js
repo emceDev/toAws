@@ -19,7 +19,6 @@ class Cart extends Component {
 			: "block";
 	}
 	render() {
-		// console.log(this.props);
 		const { myBag, items, totalPrices, quantity } = this.props;
 		return (
 			<div className="Cart">
@@ -48,6 +47,7 @@ class Cart extends Component {
 									myBag={myBag}
 									key={x.productId}
 									item={x.productId}
+									inCartQuantity={x.inCartQuantity}
 									client={this.props.client}
 								/>
 							))}
@@ -61,6 +61,7 @@ class Cart extends Component {
 								prices={totalPrices}
 								quantity={quantity}
 								items={items}
+								client={this.props.client}
 							/>
 						)}
 					</div>

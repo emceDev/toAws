@@ -22,8 +22,6 @@ class ProductDetails extends Component {
 		let e = document.getElementsByClassName("Description")[0];
 		let x = e.childNodes.length === 0 ? "" : e.childNodes;
 		e.innerHTML = html;
-		// //console.log(x);
-		// return e;
 		return;
 	}
 	render() {

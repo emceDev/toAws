@@ -32,7 +32,7 @@ class ProductCard extends Component {
 							<PNames name={name} />
 							<Price prices={prices} />
 						</div>
-						{this.props.isInCart ? <img src={inCart} /> : <div></div>}
+						{this.props.product.isInCart ? <img src={inCart} /> : <div></div>}
 					</div>
 				</Link>
 			</div>
