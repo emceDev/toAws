@@ -20,10 +20,11 @@ export const selectAttributes = (Component) => {
 
 		function handleWrite(data) {
 			console.log("writing, ", data);
-			return props.client.writeFragment({
+
+			props.client.writeFragment({
 				id: "Product:" + props.productId,
 				fragment: gql`
-					fragment Prod on Product {
+					fragment prodAttrs on Product {
 						setAttrs {
 							attrId
 							attrValue
@@ -44,19 +45,15 @@ export const selectAttributes = (Component) => {
 			return handleWrite(nA);
 		};
 
-		if (attrs !== null) {
-			return (
-				<Component
-					{...props}
-					setAttrs={attrs}
-					attributes={attributes}
-					modify={(prodId, attrId, attrValue) => {
-						modify(prodId, attrId, attrValue);
-					}}
-				/>
-			);
-		} else {
-			return <p>loading attributes</p>;
-		}
+		return (
+			<Component
+				{...props}
+				setAttrs={attrs}
+				attributes={attributes}
+				modify={(prodId, attrId, attrValue) => {
+					modify(prodId, attrId, attrValue);
+				}}
+			/>
+		);
 	};
 };

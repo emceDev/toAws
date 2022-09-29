@@ -13,6 +13,14 @@ export const GET_CATEGORIES = gql`
 		}
 	}
 `;
+export const GET_CURRENCIES = gql`
+	{
+		currencies {
+			label
+			symbol
+		}
+	}
+`;
 export const GET_PRODUCTS = gql`
 	query GetProducts($pid: String!) {
 		category(input: { title: $pid }) {
@@ -73,6 +81,7 @@ export const GET_PRODUCT_DETAILS = gql`
 export const GET_PRODUCT_ATTRS = gql`
 	query getAttrs($pid: String!) {
 		product(id: $pid) {
+			id
 			attributes {
 				name
 				items {
@@ -113,14 +122,6 @@ export const GET_PD_FOR_CART = gql`
 				}
 				amount
 			}
-		}
-	}
-`;
-export const GET_CURRENCIES = gql`
-	{
-		currencies {
-			label
-			symbol
 		}
 	}
 `;

@@ -8,27 +8,40 @@ import AdjustButtons from "./AdjustButtons";
 class ProductCard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { fastShop: false };
+		this.state = { fastShopAtts: false, fastShopBtn: false };
 	}
 	showPopup(e) {
 		e.preventDefault();
-		console.log("showing", this.props);
-		this.setState({ fastShop: true });
+		console.log("showing", this.state.fastShopAtts);
+		this.setState({ fastShopAtts: !this.state.fastShopAtts });
 	}
 	render() {
 		const { inStock, gallery, name, prices, id } = this.props.product;
 		return (
-			<div className="ProductCard">
-				{console.log(this.props)}
+			<div
+				className="ProductCard"
+				onMouseEnter={() => {
+					this.setState({ fastShopBtn: true });
+				}}
+				onMouseLeave={() => {
+					this.setState({ fastShopBtn: false });
+				}}
+			>
 				<div
 					className="stockOverlay"
 					style={{
 						visibility: inStock ? "hidden" : "block",
 					}}
 				></div>
-				{this.state.fastShop ? (
+				{this.state.fastShopAtts ? (
 					<div className="fastShopPop stockOverlay">
-						<AdjustButtons productId={id} client={this.props.client} />
+						<div
+							onMouseLeave={() => {
+								this.setState({ fastShopAtts: false });
+							}}
+						>
+							<AdjustButtons productId={id} client={this.props.client} />
+						</div>
 					</div>
 				) : null}
 
@@ -48,7 +61,11 @@ class ProductCard extends Component {
 							<PNames name={name} />
 							<Price prices={prices} />
 						</div>
-						<div>
+						<div
+							style={{
+								display: this.state.fastShopBtn && inStock ? "block" : "none",
+							}}
+						>
 							<img src={inCart} onClick={(e) => this.showPopup(e)} />
 						</div>
 					</div>
