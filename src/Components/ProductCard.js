@@ -1,9 +1,9 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import Price from "./Price";
-import inCart from "../images/CircleIcon.png";
 import PNames from "./PNames";
 import AdjustButtons from "./AdjustButtons";
+import FastShopImage from "./fastShopImage";
 
 class ProductCard extends Component {
 	constructor(props) {
@@ -12,11 +12,12 @@ class ProductCard extends Component {
 	}
 	showPopup(e) {
 		e.preventDefault();
-		console.log("showing", this.state.fastShopAtts);
+
 		this.setState({ fastShopAtts: !this.state.fastShopAtts });
 	}
 	render() {
-		const { inStock, gallery, name, prices, id } = this.props.product;
+		const { inStock, gallery, name, prices, id, isInCart, attributes } =
+			this.props.product;
 		return (
 			<div
 				className="ProductCard"
@@ -33,7 +34,8 @@ class ProductCard extends Component {
 						visibility: inStock ? "hidden" : "block",
 					}}
 				></div>
-				{this.state.fastShopAtts ? (
+
+				{this.state.fastShopAtts && attributes.length > 0 ? (
 					<div className="fastShopPop stockOverlay">
 						<div
 							onMouseLeave={() => {
@@ -63,10 +65,17 @@ class ProductCard extends Component {
 						</div>
 						<div
 							style={{
-								display: this.state.fastShopBtn && inStock ? "block" : "none",
+								display:
+									this.state.fastShopBtn && inStock && !isInCart
+										? "block"
+										: "none",
 							}}
 						>
-							<img src={inCart} onClick={(e) => this.showPopup(e)} />
+							<FastShopImage
+								productId={id}
+								inCart
+								showPopup={(e) => this.showPopup(e)}
+							/>
 						</div>
 					</div>
 				</Link>

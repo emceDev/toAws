@@ -38,12 +38,16 @@ class AdjustButtons extends Component {
 													)}
 													key={item.id}
 													id={item.id}
-													style={{
-														backgroundColor:
-															attr.name === "Color" ? item.value : null,
-													}}
 												>
-													{attr.name !== "Color" ? item.value : null}
+													{attr.name !== "Color" ? (
+														item.value
+													) : (
+														<div
+															style={{
+																backgroundColor: item.value,
+															}}
+														></div>
+													)}
 												</div>
 											);
 										})}

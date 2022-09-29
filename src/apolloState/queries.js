@@ -31,7 +31,14 @@ export const GET_PRODUCTS = gql`
 				gallery
 				inStock
 				isInCart @client
-
+				attributes {
+					name
+					items {
+						id
+						value
+						displayValue
+					}
+				}
 				prices {
 					currency {
 						symbol
@@ -115,6 +122,21 @@ export const GET_PD_FOR_CART = gql`
 			}
 			isInCart @client
 			cartQuantity @client
+			prices {
+				currency {
+					symbol
+					label
+				}
+				amount
+			}
+		}
+	}
+`;
+export const GET_PRICES = gql`
+	query GetProductPrices($pid: String!) {
+		product(id: $pid) {
+			id
+			isInCart @client
 			prices {
 				currency {
 					symbol

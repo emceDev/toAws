@@ -38,9 +38,10 @@ class Cart extends Component {
 					}}
 				>
 					<div>
-						<h1>
-							{!myBag ? "Cart" : "My bag"},{items.length}
-						</h1>
+						<div>
+							<b>{!myBag ? "Cart" : "My bag"}</b>, {items.length}
+							{items.length > 1 || items.length === 0 ? " items" : " item"}
+						</div>
 						<div className="CartProducts">
 							{items.map((x) => (
 								<CartProduct

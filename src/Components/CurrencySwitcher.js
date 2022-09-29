@@ -21,6 +21,8 @@ class Switcher extends Component {
 				<div
 					className="CurrencyList"
 					style={{ display: this.state.shown ? "block" : "none" }}
+					onMouseLeave={() => this.setState({ shown: false })}
+					onClick={() => this.setState({ shown: false })}
 				>
 					{!this.props.data ? (
 						<p>no DATA!</p>

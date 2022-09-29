@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { addToCart } from "../HOC/addToCart";
 
 class AddToCartButton extends Component {
 	render() {
@@ -10,4 +11,4 @@ class AddToCartButton extends Component {
 	}
 }
 
-export default AddToCartButton;
+export default addToCart(AddToCartButton);

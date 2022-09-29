@@ -22,6 +22,9 @@
 }
 
 .ProductList{
+    h1{
+        font-size: 42px;
+    }
     .ProductNames{
         font-weight: 300;
         font-size: 18px;
@@ -35,9 +38,7 @@
 }
 .Navbar{
     .Categories{
-        
-    
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 120%;
     color: #1D1F22;
@@ -46,6 +47,9 @@
         font-weight: 600;
         color: #5ECE7B;
     
+    }
+    .Categories .active{
+        color: #5ECE7B
     }
 }
 .CurrencySwitcher{
@@ -143,6 +147,7 @@ line-height: 160%;
     }}
     
 .Description{
+    font-family: 'Roboto';
     font-weight: 400;
     font-size: 16px;
     line-height: 159.96%;
@@ -208,8 +213,11 @@ line-height: 160%;
     }
     .AttributeContainer *{
         font-weight: 400;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 16px;
+        .AttrBtnText{
+            font-size: 10px;
+        }
     }
     .QuantityButtons p{
         font-weight: 500;

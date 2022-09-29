@@ -19,8 +19,10 @@ class Price extends Component {
 				{this.props.prices.map((x) =>
 					x.currency.label === this.props.currenc.label ? (
 						<div key={x.currency.label}>
-							{this.props.currenc.symbol}
-							{x.amount}
+							<b>
+								{this.props.currenc.symbol}
+								{Math.round(x.amount * 100) / 100}
+							</b>
 						</div>
 					) : null
 				)}

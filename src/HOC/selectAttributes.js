@@ -10,7 +10,6 @@ export const selectAttributes = (Component) => {
 		const [attrs, setAttrs] = useState(null);
 		const [attributes, setAttributes] = useState(null);
 		useEffect(() => {
-			console.log("ADJSTBUTTONS: ", getAttrs);
 			if (getAttrs.data === undefined) {
 			} else {
 				setAttrs(getAttrs.data.product.setAttrs);
@@ -19,8 +18,6 @@ export const selectAttributes = (Component) => {
 		}, [getAttrs]);
 
 		function handleWrite(data) {
-			console.log("writing, ", data);
-
 			props.client.writeFragment({
 				id: "Product:" + props.productId,
 				fragment: gql`

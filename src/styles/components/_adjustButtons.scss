@@ -1,16 +1,18 @@
-
+.AttributeContainer{
+  .active{
+    
+    background-color: black;
+    color: white;
+  }
+}
  .AttrBtns{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
- 
-}
-.active{
-  background-color: black;
-  color: white;
-}
-.AttrBtnText{
 
+}
+
+.AttrBtnText{
 display: flex;
 align-items: center;
 justify-content: center;
@@ -21,10 +23,19 @@ height: 45px;
 
 }
 .AttrBtnColor{
+  border: solid 1px white;
   display: flex;
   align-items: center;
   justify-content: center;
   // copied
   width: 32px;
   height: 32px;
+  div{
+    height: 90%;
+    width:90%;
   }
+  }
+.AttrBtnColor.active{
+  border: solid 1px green;
+  background-color: white;
+}

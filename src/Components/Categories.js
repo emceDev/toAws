@@ -11,10 +11,17 @@ class Categories extends Component {
 						: null
 				}
 			>
+				{console.log()}
 				{this.props.categories !== undefined ? (
 					this.props.categories.categories.map((cat, index) => {
 						return (
-							<div num={cat.name} key={cat.name}>
+							<div
+								num={cat.name}
+								key={cat.name}
+								className={
+									this.props.selected === cat.name ? "active" : "categoryBtn"
+								}
+							>
 								{cat.name}
 							</div>
 						);
