@@ -5,3 +5,12 @@
     min-height: 80vh;
     width: 100vw;
   }
+.fastShopPop{
+  position: relative;
+  background-color: yellow;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    z-index: 100;
+}

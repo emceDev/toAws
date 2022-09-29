@@ -3,7 +3,7 @@ import { Component } from "react";
 import AddToCartButton from "../Components/AddToCartButton.js";
 import Price from "../Components/Price";
 import PNames from "../Components/PNames";
-import { getProduct } from "../HOC/getProductDetails";
+import { getProductDetails } from "../HOC/getProductDetails";
 import { sanitize } from "dompurify";
 import Imgs from "../Components/Imgs";
 
@@ -14,10 +14,11 @@ class ProductDetails extends Component {
 			selected: 0,
 		};
 	}
-
+	// image switch
 	selected(index) {
 		this.setState({ selected: index });
 	}
+	// decoding with sanitization
 	decode(html) {
 		let e = document.getElementsByClassName("Description")[0];
 		let x = e.childNodes.length === 0 ? "" : e.childNodes;
@@ -47,7 +48,6 @@ class ProductDetails extends Component {
 
 						<AdjustButtons
 							productId={id}
-							attributes={attributes}
 							place="Details"
 							client={this.props.client}
 						/>
@@ -77,4 +77,4 @@ class ProductDetails extends Component {
 	}
 }
 
-export default getProduct(ProductDetails);
+export default getProductDetails(ProductDetails);

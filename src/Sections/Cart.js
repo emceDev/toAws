@@ -1,4 +1,4 @@
-import { Component, useState, useEffect } from "react";
+import { Component } from "react";
 
 import CartProduct from "../Components/CartProduct";
 import CartSwitch from "../Components/CartSwitch";

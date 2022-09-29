@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { Component, useEffect } from "react";
+import { Component } from "react";
 import Price from "./Price";
 import Taxed from "./Taxed";
 

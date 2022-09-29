@@ -3,19 +3,35 @@ import { Link } from "react-router-dom";
 import Price from "./Price";
 import inCart from "../images/CircleIcon.png";
 import PNames from "./PNames";
+import AdjustButtons from "./AdjustButtons";
 
 class ProductCard extends Component {
-	state = {};
+	constructor(props) {
+		super(props);
+		this.state = { fastShop: false };
+	}
+	showPopup(e) {
+		e.preventDefault();
+		console.log("showing", this.props);
+		this.setState({ fastShop: true });
+	}
 	render() {
 		const { inStock, gallery, name, prices, id } = this.props.product;
 		return (
 			<div className="ProductCard">
+				{console.log(this.props)}
 				<div
 					className="stockOverlay"
 					style={{
 						visibility: inStock ? "hidden" : "block",
 					}}
 				></div>
+				{this.state.fastShop ? (
+					<div className="fastShopPop stockOverlay">
+						<AdjustButtons productId={id} client={this.props.client} />
+					</div>
+				) : null}
+
 				<Link to={`/products/${id}`}>
 					<div className="Image">
 						<div
@@ -32,7 +48,9 @@ class ProductCard extends Component {
 							<PNames name={name} />
 							<Price prices={prices} />
 						</div>
-						{this.props.product.isInCart ? <img src={inCart} /> : <div></div>}
+						<div>
+							<img src={inCart} onClick={(e) => this.showPopup(e)} />
+						</div>
 					</div>
 				</Link>
 			</div>

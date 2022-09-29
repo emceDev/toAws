@@ -3,7 +3,7 @@ import QuantityButtons from "./QuantityButtons";
 import { Component } from "react";
 import Price from "./Price";
 import PNames from "./PNames";
-import { getProduct } from "../HOC/getProductDetails";
+import { getProductDetails } from "../HOC/getProductDetails";
 import { Link } from "react-router-dom";
 
 class CartProduct extends Component {
@@ -34,7 +34,6 @@ class CartProduct extends Component {
 
 					<AdjustButtons
 						productId={this.props.data.product.id}
-						attributes={this.props.data.product.attributes}
 						place={"cart" + this.props.data.product.id}
 						client={this.props.client}
 					/>
@@ -72,4 +71,4 @@ class CartProduct extends Component {
 	}
 }
 
-export default getProduct(CartProduct);
+export default getProductDetails(CartProduct);

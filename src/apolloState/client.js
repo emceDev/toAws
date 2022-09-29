@@ -1,17 +1,10 @@
-import {
-	ApolloClient,
-	InMemoryCache,
-	ApolloProvider,
-	gql,
-	makeVar,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
 
 // products in cart
 const cartItem = {
 	productId: "id",
 	quantity: "quantity",
 	prices: { amount: "123", currency: { symbol: "usd" } },
-	setAttributes: ["array"],
 };
 export const cartProductsVar = makeVar([]);
 const summary = {
@@ -55,8 +48,12 @@ const cache = new InMemoryCache({
 						const defs = [];
 						if (setAttrs.length === 0) {
 							readField("attributes")?.map((ref) => {
-								let id = ref.__ref.replace("AttributeSet:", "");
-								let value = readField("items", ref)[0].value;
+								let id = ref.name;
+								let value = readField("items", ref)[0].__ref.replace(
+									"Attribute:",
+									""
+								);
+
 								defs.push({ attrId: id, attrValue: value });
 							});
 							return defs;

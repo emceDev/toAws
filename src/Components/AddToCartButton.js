@@ -1,9 +1,4 @@
-import { makeVar, InMemoryCache, useReactiveVar } from "@apollo/client";
-import { useEffect } from "react";
-import { useState } from "react";
 import { Component } from "react";
-import { cartItemsVar, currentlyModified } from "../apolloState/client";
-import { handleCart } from "../HOC/handleCart";
 
 class AddToCartButton extends Component {
 	render() {

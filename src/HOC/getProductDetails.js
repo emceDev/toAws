@@ -1,57 +1,20 @@
-import AdjustButtons from "../Components/AdjustButtons";
-import { Component, useEffect } from "react";
-import { useQuery, gql, useReactiveVar } from "@apollo/client";
-import AddToCartButton from "../Components/AddToCartButton.js";
+import { useQuery, useReactiveVar } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import Price from "../Components/Price";
-import PNames from "../Components/PNames";
 import { cartProductsVar } from "../apolloState/client";
-// choosen field prevents selected attributes to change in cache leading tp mismatches
-// I fugred it out after four days of rounding around the problem
-const GET_PRODUCT_DETAILS = gql`
-	query GetProduct($pid: String!) {
-		product(id: $pid) {
-			name
-			id
-			brand
-			description
-			gallery
-			inStock
-			isInCart @client
-			attributes {
-				name
-				id
-				items {
-					value
-					displayValue
-				}
-			}
-			setAttrs @client {
-				attrId
-				attrValue
-			}
-			isInCart @client
-			inCartQuantity @client
-			prices {
-				currency {
-					symbol
-					label
-				}
-				amount
-			}
-		}
-	}
-`;
-
-export const getProduct = (Component) => {
+import { GET_PRODUCT_DETAILS } from "../apolloState/queries";
+import { useEffect } from "react";
+export const getProductDetails = (Component) => {
 	return function WrappedComponent(props) {
 		let params = useParams().id;
 		const currentCart = useReactiveVar(cartProductsVar);
-		const { data, loading, err } = useQuery(GET_PRODUCT_DETAILS, {
+		const { data, loading } = useQuery(GET_PRODUCT_DETAILS, {
 			// variables: { pid: params === undefined ? props.item : params },
 			variables: { pid: props.place === "product" ? params : props.item },
 		});
 
+		useEffect(() => {
+			console.log(data);
+		}, [data]);
 		function addRemove() {
 			const p = data.product;
 

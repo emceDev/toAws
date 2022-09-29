@@ -1,12 +1,7 @@
-import { cartItemsVar, taxVar } from "../apolloState/client";
-import { gql, useQuery, useReactiveVar } from "@apollo/client";
+import { taxVar } from "../apolloState/client";
+import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { cartProductsVar } from "../apolloState/client";
-const GET_CART = gql`
-	query getCart {
-		cart @client
-	}
-`;
+import { GET_CART } from "../apolloState/queries";
 
 export const getCartItems = (Component) => {
 	return function WrappedComponent(props) {
@@ -14,7 +9,7 @@ export const getCartItems = (Component) => {
 		const [totalPrices, setTotalPrices] = useState([]);
 		const [quantity, setQuantity] = useState(0);
 		// const cart = useReactiveVar(cartProductsVar);
-		const { data, loading, error } = useQuery(GET_CART);
+		const { data } = useQuery(GET_CART);
 		const cart = data.cart;
 		useEffect(() => {
 			return cart !== undefined ? sum() : null;
@@ -45,18 +40,16 @@ export const getCartItems = (Component) => {
 			}
 		};
 
-		if (cart.length !== 0) {
-			return (
-				<>
-					<Component
-						{...props}
-						items={cart}
-						quantity={quantity}
-						tax={tax}
-						totalPrices={totalPrices}
-					/>
-				</>
-			);
-		}
+		return (
+			<>
+				<Component
+					{...props}
+					items={cart}
+					quantity={quantity}
+					tax={tax}
+					totalPrices={totalPrices}
+				/>
+			</>
+		);
 	};
 };

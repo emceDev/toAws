@@ -18,7 +18,7 @@ Sections:
 Components:
 (Components)
 HOC:
--Higher order components containing queries
+-Higher order components used to make queries
 Styles:
 -scss styles for components
 apolloState:
@@ -27,6 +27,7 @@ apolloState:
 # Styling
 
 Styles structure:
+
 -global style:
 .AttrBtnText{
 ...previousStyles,
@@ -48,18 +49,28 @@ selected currency,
 currently modified - attributes of product being modified not yet put into the cart
 
 There are two client only fields:
+
 Product{
+
+setAttrs - selected attributes of product (default or chosen by user), used to maintain consistency in adjust button component, besides this value takes part in order process.
+
 isInCart- true if product is in cart (variable used when displaying inCart icon on ProductCard component)
-}
-Currency{
-selected- returns true or false if currency is selected One (used in order to display one currency everywhere)
+
 }
 
-# There are four queries:
+Currency{
+
+selected- returns true or false if currency is selected One (used in order to display one currency everywhere)
+
+}
+
+# There are three main queries:
 
 getCategories - fetching categories list (without products), used to display navbar buttons
+getProdFromCat - gets product list from specific category
 getProduct - gets specific product
-getProdFromCat - gets products from specific category
+
+rest is in apollosState/queries.js
 
 # Use Case:
 
@@ -80,3 +91,6 @@ there is boolean pushed depending where it renders. e.g <Navbar><Cart myBag={tru
 
 There is console.log left at Cart section in order to check if user can buy a product.
 I tried to use as much of apollo as I could, propably bcs its new to me, if I've known its caveats, I would rethink some parts of the app.
+
+I did not use the scandiweb PWA alias system here as it was not included in the requirements to do so, as far as I understand them.
+Happy hacking!

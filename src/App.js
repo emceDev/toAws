@@ -7,48 +7,19 @@ import Navbar from "./Sections/Navbar";
 import ProductList from "./Sections/ProductList";
 import ProductDetails from "./Sections/ProductDetails";
 import Cart from "./Sections/Cart";
-import Son from "./test/son";
-import Sis from "./test/sis";
-import { AddTodo, Tada } from "./test/addTodo";
 
 class App extends Component {
 	state = { view: false };
 
-	setView() {
-		// this.setState({ view: !this.state.view });
-		this.props.client.cache.writeQuery({
-			query: gql`
-				query ReadTodo($id: ID!) {
-					todo(id: $id) {
-						id
-						text
-						completed
-					}
-				}
-			`,
-			data: {
-				todo: {
-					__typename: "Todo",
-					id: 5,
-					text: "Buy grapes 🍇",
-					completed: false,
-				},
-			},
-			variables: {
-				id: 5,
-			},
-		});
-	}
 	render() {
 		return (
 			<div className="App">
-				{/* <Tada client={this.props.client} /> */}
-
-				{/* <Sis />
-				<Son /> */}
 				<Navbar showCart={() => this.setView()} client={this.props.client} />
 				<Routes>
-					<Route path="/" element={<ProductList />}></Route>
+					<Route
+						path="/"
+						element={<ProductList client={this.props.client} />}
+					></Route>
 
 					<Route
 						path="/Cart"

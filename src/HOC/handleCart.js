@@ -1,37 +1,8 @@
-import { gql, useQuery, useReactiveVar } from "@apollo/client";
+import { useQuery, useReactiveVar } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { cartItemsVar, currentlyModified } from "../apolloState/client";
 import { cartProductsVar } from "../apolloState/client";
+import { GET_PD_FOR_CART } from "../apolloState/queries";
 
-// one here
-const GET_PD_FOR_CART = gql`
-	query GetProductForCart($pid: String!) {
-		product(id: $pid) {
-			id
-			inStock
-			attributes {
-				id
-				items {
-					value
-					id
-				}
-			}
-			setAttrs @client {
-				attrId
-				attrValue
-			}
-			isInCart @client
-			cartQuantity @client
-			prices {
-				currency {
-					symbol
-					label
-				}
-				amount
-			}
-		}
-	}
-`;
 // This function adds/removes product to/from cart and handles modified product
 export const handleCart = (Component) => {
 	return function WrappedComponent(props) {

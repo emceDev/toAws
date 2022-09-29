@@ -1,37 +1,5 @@
-import { gql, useQuery, useReactiveVar } from "@apollo/client";
-import { useState, useEffect, Component } from "react";
-import { selectedCurrencyVar } from "../apolloState/client";
-import imgVectorDown from "../images/downV.png";
-const GET_CURRENCIES = gql`
-	{
-		currencies {
-			label
-			symbol
-		}
-	}
-`;
-
-const getCurrencies = (Component) => {
-	return function WrappedComponent(props) {
-		const { data, loading, err } = useQuery(GET_CURRENCIES);
-		const currenc = useReactiveVar(selectedCurrencyVar);
-		function selectCurrency(currency) {
-			selectedCurrencyVar(currency);
-		}
-		if (data) {
-			return (
-				<Component
-					{...props}
-					data={data}
-					selectCurrency={(x) => selectCurrency(x)}
-					currenc={currenc}
-				/>
-			);
-		} else {
-			return <p>Loading prices</p>;
-		}
-	};
-};
+import { Component } from "react";
+import { getCurrencies } from "../HOC/getCurrencies";
 
 class Switcher extends Component {
 	constructor(props) {
