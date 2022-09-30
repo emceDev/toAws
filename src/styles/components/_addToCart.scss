@@ -1,9 +1,10 @@
+@import '../sections/vars.scss';
 .AddToCart{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 5vh;
-    background-color: #5ECE7B;
+    background-color: $green;
     color: white;
 }

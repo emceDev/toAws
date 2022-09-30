@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 import { getCategories } from "../HOC/getCategories";
 class Categories extends Component {
 	render() {
@@ -11,19 +12,19 @@ class Categories extends Component {
 						: null
 				}
 			>
-				{console.log()}
 				{this.props.categories !== undefined ? (
 					this.props.categories.categories.map((cat, index) => {
 						return (
-							<div
-								num={cat.name}
-								key={cat.name}
-								className={
-									this.props.selected === cat.name ? "active" : "categoryBtn"
-								}
-							>
-								{cat.name}
-							</div>
+							<Link to={`/`} key={cat.name}>
+								<div
+									num={cat.name}
+									className={
+										this.props.selected === cat.name ? "active" : "categoryBtn"
+									}
+								>
+									{cat.name}
+								</div>
+							</Link>
 						);
 					})
 				) : (

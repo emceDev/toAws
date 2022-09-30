@@ -1,3 +1,4 @@
+@import '../sections/vars';
 .CartOverlay{
     background-color: white;
     position: absolute;
@@ -64,7 +65,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #5ECE7B;
+        background-color: $green;
       }
       a{
         display: flex;

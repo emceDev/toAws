@@ -1,8 +1,6 @@
 import "./App.scss";
 import { Component } from "react";
-import { gql } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
 import Navbar from "./Sections/Navbar";
 import ProductList from "./Sections/ProductList";
 import ProductDetails from "./Sections/ProductDetails";

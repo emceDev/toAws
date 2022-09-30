@@ -1,16 +1,14 @@
 import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
 
 // products in cart
-const cartItem = {
-	productId: "id",
-	quantity: "quantity",
-	prices: { amount: "123", currency: { symbol: "usd" } },
-};
+// const cartItem = {
+// 	productId: "id",
+// 	quantity: "quantity",
+// 	prices: { amount: "123", currency: { symbol: "usd" } },
+// };
+
 export const cartProductsVar = makeVar([]);
-const summary = {
-	total: "map cart products",
-	quantity: "list of cart products",
-};
+
 export const cartSummary = makeVar([]);
 export const cartItemsVar = makeVar([]);
 
@@ -54,7 +52,7 @@ const cache = new InMemoryCache({
 									""
 								);
 
-								defs.push({ attrId: id, attrValue: value });
+								return defs.push({ attrId: id, attrValue: value });
 							});
 							return defs;
 						} else {

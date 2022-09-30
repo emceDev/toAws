@@ -4,16 +4,17 @@ import { useState, useEffect } from "react";
 
 export const selectAttributes = (Component) => {
 	return function WrappedComponent(props) {
-		const getAttrs = useQuery(GET_PRODUCT_ATTRS, {
+		const { data, loading, error } = useQuery(GET_PRODUCT_ATTRS, {
 			variables: { pid: props.productId },
 		});
 		const [attrs, setAttrs] = useState(null);
 		const [attributes, setAttributes] = useState(null);
+		const getAttrs = data;
 		useEffect(() => {
-			if (getAttrs.data === undefined) {
+			if (getAttrs === undefined) {
 			} else {
-				setAttrs(getAttrs.data.product.setAttrs);
-				setAttributes(getAttrs.data.product.attributes);
+				setAttrs(getAttrs.product.setAttrs);
+				setAttributes(getAttrs.product.attributes);
 			}
 		}, [getAttrs]);
 
@@ -41,16 +42,21 @@ export const selectAttributes = (Component) => {
 			);
 			return handleWrite(nA);
 		};
-
-		return (
-			<Component
-				{...props}
-				setAttrs={attrs}
-				attributes={attributes}
-				modify={(prodId, attrId, attrValue) => {
-					modify(prodId, attrId, attrValue);
-				}}
-			/>
-		);
+		if (loading) {
+			<p>loading...</p>;
+		} else if (error) {
+			<p>error occurred</p>;
+		} else {
+			return (
+				<Component
+					{...props}
+					setAttrs={attrs}
+					attributes={attributes}
+					modify={(prodId, attrId, attrValue) => {
+						modify(prodId, attrId, attrValue);
+					}}
+				/>
+			);
+		}
 	};
 };

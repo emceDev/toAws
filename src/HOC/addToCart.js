@@ -5,7 +5,7 @@ import { GET_PRICES } from "../apolloState/queries";
 export const addToCart = (Component) => {
 	return function WrappedComponent(props) {
 		const currentCart = useReactiveVar(cartProductsVar);
-		const { data, loading } = useQuery(GET_PRICES, {
+		const { data, loading, error } = useQuery(GET_PRICES, {
 			variables: { pid: props.productId },
 		});
 		function addRemove() {
@@ -22,10 +22,12 @@ export const addToCart = (Component) => {
 					: [...currentCart, toCartData]
 			);
 		}
-		if (loading !== true) {
-			return <Component {...props} data={data} addRemove={addRemove} />;
+		if (loading) {
+			<p>loading...</p>;
+		} else if (error) {
+			<p>error occurred</p>;
 		} else {
-			return <p>Loading details...</p>;
+			return <Component {...props} data={data} addRemove={addRemove} />;
 		}
 	};
 };

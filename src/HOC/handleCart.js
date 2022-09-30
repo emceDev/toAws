@@ -8,10 +8,10 @@ export const handleCart = (Component) => {
 	return function WrappedComponent(props) {
 		const currentCart = useReactiveVar(cartProductsVar);
 		const [isInCart, setIsInCart] = useState(false);
-		const product = useQuery(GET_PD_FOR_CART, {
+		const { data, loading, error } = useQuery(GET_PD_FOR_CART, {
 			variables: { pid: props.productId },
 		});
-
+		const product = data.product;
 		useEffect(() => {
 			if (product.data !== undefined) {
 				setIsInCart(product.data.product.isInCart);
@@ -29,8 +29,14 @@ export const handleCart = (Component) => {
 					: [...currentCart, cartProduct]
 			);
 		}
-		return (
-			<Component {...props} click={() => addRemove()} isInCart={isInCart} />
-		);
+		if (loading) {
+			<p>loading...</p>;
+		} else if (error) {
+			<p>error occurred</p>;
+		} else {
+			return (
+				<Component {...props} click={() => addRemove()} isInCart={isInCart} />
+			);
+		}
 	};
 };
